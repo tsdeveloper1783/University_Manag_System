@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="register-users.html" class="text-decoration-none text-dark"><i class="fas fa-user-plus me-2"></i>Register Users</a>
+        </li>
+            <li class="list-group-item bg-transparent border-0">
+  <a href="dept-coordinators.html" class="text-decoration-none text-dark">
+    <i class="fas fa-users-cog me-2"></i>Dept Coordinators
+  </a>
+</li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="approve-teachers.html" class="text-decoration-none text-dark"><i class="fas fa-user-check me-2"></i>Approve Teachers</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+         <a href="manage-semester.html" class="text-decoration-none text-dark"><i class="fas fa-file-alt me-2"></i>Manage Semester</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-courses.html" class="text-decoration-none text-dark"><i class="fas fa-book-open me-2"></i>Manage Courses</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="student-enrollments.html" class="text-decoration-none text-dark"><i class="fas fa-user-graduate me-2"></i>Student Enrollment</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="fee-management.html" class="text-decoration-none text-dark"><i class="fas fa-money-check-alt me-2"></i>Fee Management</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="activity-monitor.html" class="text-decoration-none text-dark"><i class="fas fa-chart-line me-2"></i>Activity Monitor</a>
+        </li>
+         <li class="list-group-item bg-transparent border-0">
+          <a href="generate-reports.html" class="text-decoration-none text-dark"><i class="fas fa-file-download me-2"></i>Generate Reports</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+            <!-- Main Content -->
+       <style>
+  .semester-card {
+    background-color: #fff;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    animation: slideFade 0.6s ease-in-out;
+  }
+
+  .semester-card .card-body {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .semester-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(to right, #0d6efd, #0dcaf0);
+  }
+
+  .semester-card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s ease;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  @keyframes slideFade {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<div class="container py-5">
+  <h2 class="mb-4 fw-bold text-primary">Manage Semester</h2>
+
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card semester-card">
+        <div class="card-body">
+          <h6>Total Semesters</h6>
+          <h3 id="totalSemesters">8</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card semester-card">
+        <div class="card-body">
+          <h6>Active</h6>
+          <h3 id="activeSemesters">4</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card semester-card">
+        <div class="card-body">
+          <h6>Inactive</h6>
+          <h3 id="inactiveSemesters">4</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- Add Semester Form Toggle -->
+<button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#addSemesterForm" aria-expanded="false" aria-controls="addSemesterForm">
+  <i class="fas fa-plus-circle me-2"></i> Add New Semester
+</button>
+
+
+<!-- Add Semester Form -->
+<div class="collapse" id="addSemesterForm">
+  <div class="card card-body mb-4 shadow-lg border-0 rounded-4" style="background: #f7fdfc;">
+    <form id="semesterForm">
+      <div class="row g-3">
+
+        <!-- Session -->
+        <div class="col-md-4">
+          <label for="session" class="form-label"><i class="fas fa-calendar-alt text-success me-2"></i>Session</label>
+          <select class="form-select rounded-3 py-2" id="session" required>
+            <option selected disabled>Select Session</option>
+            <option value="2022-2026">2022-2026</option>
+            <option value="2023-2027">2023-2027</option>
+            <option value="2024-2028">2024-2028</option>
+          </select>
+        </div>
+
+        <!-- Semester Type -->
+        <div class="col-md-4">
+          <label for="category" class="form-label"><i class="fas fa-tags text-primary me-2"></i>Semester Type</label>
+          <select class="form-select rounded-3 py-2" id="category" required>
+            <option selected disabled>Select Semester Type</option>
+            <option value="Fall">Fall</option>
+            <option value="Spring">Spring</option>
+            <option value="Summer">Summer</option>
+          </select>
+        </div>
+
+        <!-- Semester Scheme -->
+        <div class="col-md-4">
+          <label for="sectionType" class="form-label"><i class="fas fa-users text-info me-2"></i>Semester Scheme</label>
+          <select class="form-select rounded-3 py-2" id="sectionType" required>
+            <option selected disabled>Select Semester Scheme</option>
+            <option value="Regular">Regular</option>
+            <option value="Self">Self</option>
+          </select>
+        </div>
+
+        <!-- Semester/Class -->
+        <div class="col-md-4">
+          <label for="classNumber" class="form-label"><i class="fas fa-layer-group text-warning me-2"></i>Semester</label>
+          <select class="form-select rounded-3 py-2" id="classNumber" required>
+            <option selected disabled>Select Semester</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="col-md-4">
+          <label for="startDate" class="form-label"><i class="fas fa-play-circle text-success me-2"></i>Start Date</label>
+          <input type="date" class="form-control rounded-3 py-2" id="startDate" required>
+        </div>
+
+        <!-- End Date -->
+        <div class="col-md-4">
+          <label for="endDate" class="form-label"><i class="fas fa-stop-circle text-danger me-2"></i>End Date</label>
+          <input type="date" class="form-control rounded-3 py-2" id="endDate" required>
+        </div>
+
+      </div>
+
+      <!-- Active Checkbox -->
+      <div class="form-check mt-4">
+        <input class="form-check-input" type="checkbox" id="active">
+        <label class="form-check-label" for="active">Make Semester Active</label>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-success mt-3 px-4 py-2 rounded-3 fw-semibold shadow-sm">
+        <i class="fas fa-save me-2"></i>Save Semester
+      </button>
+    </form>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Search Bar -->
+<style>
+  .custom-search-input {
+    border: none;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    padding: 0.75rem 1rem;
+    box-shadow: none;
+    transition: all 0.3s ease;
+  }
+
+  .custom-search-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.15rem rgba(25, 135, 84, 0.25);
+    border-color: #198754;
+  }
+
+  .custom-search-icon {
+    background-color: #fff;
+    border-right: none;
+    padding-left: 1rem;
+    padding-right: 0.75rem;
+    color: #198754;
+  }
+
+  .custom-search-wrapper {
+    border: 1.5px solid #dee2e6;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .custom-search-wrapper:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+</style>
+
+<!-- Modern Search Bar -->
+<div class="input-group mb-4 custom-search-wrapper">
+  <span class="input-group-text custom-search-icon">
+    <i class="fas fa-search"></i>
+  </span>
+  <input type="text" 
+         class="form-control custom-search-input" 
+         placeholder="Search by session, type, semester..." 
+         id="searchInput">
+</div>
+
+
+
+ <!-- Semester Table -->
+<div class="card shadow-lg border-0 rounded-4 mt-4" style="background-color: #f8fdfc;">
+  <div class="card-body">
+    <h5 class="card-title mb-4"><i class="fas fa-table me-2 text-success"></i>All Semesters</h5>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle text-center">
+        <thead class="table-success">
+          <tr>
+            <th>Session</th>
+            <th>Semester Type</th>
+            <th>Scheme</th>
+            <th>Semester #</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="semesterTable">
+          <tr>
+            <td>2023-2027</td>
+            <td>Spring</td>
+            <td>Regular</td>
+            <td>Semester 2</td>
+            <td>2025-02-01</td>
+            <td>2025-06-30</td>
+            <td><span class="badge bg-success px-3 py-2 rounded-pill">Active</span></td>
+            <td>
+              <button class="btn btn-sm btn-outline-warning me-1"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>2022-2026</td>
+            <td>Fall</td>
+            <td>Self</td>
+            <td>Semester 1</td>
+            <td>2024-08-01</td>
+            <td>2024-12-15</td>
+            <td><span class="badge bg-danger px-3 py-2 rounded-pill">Inactive</span></td>
+            <td>
+              <button class="btn btn-sm btn-outline-warning me-1"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+
+
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html> 

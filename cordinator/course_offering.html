@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>cordinator</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        
+        <li class="list-group-item bg-transparent border-0">
+          <a href="course_allocation.html" class="text-decoration-none text-dark"><i class="fas fa-chalkboard-teacher me-2"></i>course_allocation</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="course_offering.html" class="text-decoration-none text-dark"><i class="fas fa-tasks me-2"></i>course offering</a>
+        </li>
+        
+        
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+<!-- =========================== -->
+<!-- COURSE OFFERING MODULE -->
+<!-- =========================== -->
+<div class="container-fluid px-4 mt-4">
+  <h4 class="mb-4 fw-bold">Course Offering</h4>
+
+  <!-- Session, Program, Section, Season -->
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <label for="sessionSelect" class="form-label">Select Session:</label>
+      <select id="sessionSelect" class="form-select">
+        <option disabled selected>Select Session</option>
+        <option>2015–2019</option>
+        <option>2021–2025</option>
+        <option>2022–2026</option>
+        <option>2023–2027</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="programSelect" class="form-label">Select Program:</label>
+      <select id="programSelect" class="form-select">
+        <option disabled selected>Select Program</option>
+        <option>BS</option>
+        <option>MPhil</option>
+        <option>PhD</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="sectionSelect" class="form-label">Select Section:</label>
+      <select id="sectionSelect" class="form-select">
+        <option disabled selected>Select Section</option>
+        <option>Morning </option>
+        <option>evening</option>
+        
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="seasonSelect" class="form-label">Select Season:</label>
+      <select id="seasonSelect" class="form-select">
+        <option disabled selected>Select Season</option>
+        <option>Spring</option>
+        <option>Summer</option>
+        <option>Fall</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Semester Dropdown -->
+  <div class="mb-3 col-md-3">
+    <label for="semesterSelect" class="form-label">Select Semester:</label>
+    <select id="semesterSelect" class="form-select" onchange="loadOfferingForm()">
+      <option value="" disabled selected>Select Semester</option>
+    </select>
+  </div>
+
+  <!-- Course Offering Table -->
+  <div id="offeringFormContainer" class="table-responsive"></div>
+</div>
+
+<script>
+  const dummyCourses = {
+    BS: {
+      1: [{ code: "CSC101", title: "Intro to Computing", credit: 3 }],
+      2: [{ code: "MTH102", title: "Linear Algebra", credit: 3 }],
+      3: [{ code: "CSC201", title: "Data Structures", credit: 3 }],
+      4: [{ code: "MTH202", title: "Probability", credit: 3 }],
+      5: [{ code: "CSC301", title: "Operating Systems", credit: 3 }],
+      6: [{ code: "CSC302", title: "Web Engineering", credit: 3 }],
+      7: [{ code: "CSC401", title: "AI Fundamentals", credit: 3 }],
+      8: [{ code: "CSC402", title: "Final Year Project", credit: 6 }]
+    },
+    MPhil: {
+      1: [{ code: "RCH501", title: "Research Methodology", credit: 3 }],
+      2: [{ code: "CSC502", title: "Advanced Algorithms", credit: 3 }],
+      3: [{ code: "CSC503", title: "Thesis Writing", credit: 3 }],
+      4: [{ code: "CSC504", title: "Publication Seminar", credit: 2 }]
+    },
+    PhD: {
+      1: [{ code: "PHD601", title: "Advanced Research", credit: 3 }],
+      2: [{ code: "PHD602", title: "Thesis Progress", credit: 3 }],
+      3: [{ code: "PHD603", title: "Seminar Series", credit: 2 }],
+      4: [{ code: "PHD604", title: "Dissertation Defense", credit: 6 }]
+    }
+  };
+
+  document.getElementById("programSelect").addEventListener("change", function () {
+    const program = this.value;
+    const semesterSelect = document.getElementById("semesterSelect");
+    semesterSelect.innerHTML = `<option value="" disabled selected>Select Semester</option>`;
+    const totalSemesters = program === "BS" ? 8 : 4;
+    for (let i = 1; i <= totalSemesters; i++) {
+      semesterSelect.innerHTML += `<option value="${i}">Semester ${i}</option>`;
+    }
+  });
+
+  function loadOfferingForm() {
+    const program = document.getElementById("programSelect").value;
+    const semester = document.getElementById("semesterSelect").value;
+    const selectedCourses = dummyCourses[program]?.[semester] || [];
+
+    let html = `
+      <table class="table table-bordered table-hover mt-3">
+        <thead class="table-secondary">
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>Credit Hours</th>
+            <th>Assign Instructor</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="courseRows">
+    `;
+
+    selectedCourses.forEach(course => {
+      html += `
+        <tr>
+          <td><input type="text" class="form-control" value="${course.code}" readonly></td>
+          <td><input type="text" class="form-control" value="${course.title}" readonly></td>
+          <td><input type="number" class="form-control" value="${course.credit}" min="1" readonly></td>
+          <td>
+            <select class="form-select">
+              <option disabled selected>Select Instructor</option>
+              <option>Dr. Ali</option>
+              <option>Ms. Hina</option>
+              <option>Prof. Ahmed</option>
+              <option>Mr. Raza</option>
+            </select>
+          </td>
+          <td><button class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+        </tr>
+      `;
+    });
+
+    // Add an empty row for adding a new course manually
+    html += `
+      <tr>
+        <td><input type="text" class="form-control" placeholder="e.g. CSC999"></td>
+        <td><input type="text" class="form-control" placeholder="New Course Title"></td>
+        <td><input type="number" class="form-control" value="3" min="1" readonly></td>
+        <td>
+          <select class="form-select">
+            <option disabled selected>Select Instructor</option>
+            <option>Dr. Ali</option>
+            <option>Ms. Hina</option>
+            <option>Prof. Ahmed</option>
+            <option>Mr. Raza</option>
+          </select>
+        </td>
+        <td><button class="btn btn-success btn-sm" onclick="addNewRow()">Add</button></td>
+      </tr>
+    `;
+
+    html += `
+        </tbody>
+      </table>
+      <div class="text-end">
+        <button class="btn btn-primary me-2" onclick="saveOffering()">Save Offering</button>
+        <button class="btn btn-info" onclick="viewInstructors()">View Assigned Instructors</button>
+      </div>
+    `;
+
+    document.getElementById("offeringFormContainer").innerHTML = html;
+  }
+
+  function addNewRow() {
+    const table = document.getElementById("courseRows");
+    const newRow = document.createElement("tr");
+
+    newRow.innerHTML = `
+      <td><input type="text" class="form-control" placeholder="e.g. CSCXXX"></td>
+      <td><input type="text" class="form-control" placeholder="Course Title"></td>
+      <td><input type="number" class="form-control" value="3" min="1" readonly></td>
+      <td>
+        <select class="form-select">
+          <option disabled selected>Select Instructor</option>
+          <option>Dr. Ali</option>
+          <option>Ms. Hina</option>
+          <option>Prof. Ahmed</option>
+          <option>Mr. Raza</option>
+        </select>
+      </td>
+      <td><button class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+    `;
+
+    table.appendChild(newRow);
+  }
+
+  function removeRow(button) {
+    const row = button.closest("tr");
+    row.remove();
+  }
+
+  function saveOffering() {
+    const session = document.getElementById("sessionSelect").value;
+    const program = document.getElementById("programSelect").value;
+    const section = document.getElementById("sectionSelect").value;
+    const semester = document.getElementById("semesterSelect").value;
+    const season = document.getElementById("seasonSelect").value;
+
+    if (!session || !program || !section || !semester || !season) {
+      alert("❌ Please fill all dropdowns before saving.");
+      return;
+    }
+
+    alert(`✅ Offering saved for:
+Session: ${session}
+Program: ${program}
+Section: ${section}
+Semester: ${semester}
+Season: ${season}`);
+  }
+
+  function viewInstructors() {
+    const rows = document.querySelectorAll("#courseRows tr");
+    const assignments = [];
+
+    rows.forEach(row => {
+      const code = row.cells[0].querySelector("input")?.value;
+      const title = row.cells[1].querySelector("input")?.value;
+      const instructor = row.cells[3].querySelector("select")?.value;
+
+      if (code && title && instructor && instructor !== "Select Instructor") {
+        assignments.push(`✅ ${code} - ${title}: ${instructor}`);
+      } else if (code || title) {
+        assignments.push(`⚠️ ${code || "Unknown Code"} - ${title || "Untitled"}: Instructor not selected`);
+      }
+    });
+
+    if (assignments.length > 0) {
+      alert(assignments.join('\n'));
+    } else {
+      alert("No instructor assignments found.");
+    }
+  }
+</script>
+
+
+
+   
+    </div>
+  </div>
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+  </script>
+
+</body>
+</html> 

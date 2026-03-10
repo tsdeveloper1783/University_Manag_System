@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper"
+      style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="register-users.html" class="text-decoration-none text-dark"><i
+              class="fas fa-user-plus me-2"></i>Register Users</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="dept-coordinators.html" class="text-decoration-none text-dark">
+            <i class="fas fa-users-cog me-2"></i>Dept Coordinators
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="approve-teachers.html" class="text-decoration-none text-dark"><i
+              class="fas fa-user-check me-2"></i>Approve Teachers</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-semester.html" class="text-decoration-none text-dark"><i
+              class="fas fa-file-alt me-2"></i>Manage Semester</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-courses.html" class="text-decoration-none text-dark"><i
+              class="fas fa-book-open me-2"></i>Manage Courses</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="student-enrollments.html" class="text-decoration-none text-dark"><i
+              class="fas fa-user-graduate me-2"></i>Student Enrollment</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="fee-management.html" class="text-decoration-none text-dark"><i
+              class="fas fa-money-check-alt me-2"></i>Fee Management</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="activity-monitor.html" class="text-decoration-none text-dark"><i
+              class="fas fa-chart-line me-2"></i>Activity Monitor</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="generate-reports.html" class="text-decoration-none text-dark"><i
+              class="fas fa-file-download me-2"></i>Generate Reports</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User"
+                id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button"
+                style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown"
+                style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="container my-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+
+            <!-- 🔐 Add New User Card -->
+            <div class="card shadow-lg border-0 rounded-4 mb-5">
+              <div style="background: linear-gradient(to right, #0A2670 30%, #5284e2); 
+            color: #fff; 
+            padding: 1rem 1.5rem;">
+                <h5 class="mb-0 fw-semibold"><i class="fas fa-user-plus me-2"></i> Add New User</h5>
+              </div>
+              <div class="card-body bg-light px-4 py-4">
+                <form id="addUserForm">
+                  <div class="row g-4">
+
+                    <!-- Full Name -->
+                    <div class="col-md-4">
+                      <label class="form-label fw-semibold"><i class="fas fa-user me-1"></i> Full Name</label>
+                      <input type="text" class="form-control rounded-3 shadow-sm" required
+                        placeholder="e.g. Uzair Malik">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-4">
+                      <label class="form-label fw-semibold"><i class="fas fa-envelope me-1"></i> Email</label>
+                      <input type="email" class="form-control rounded-3 shadow-sm" required
+                        placeholder="e.g. uzair@example.com">
+                    </div>
+
+                    <!-- Role -->
+                    <div class="col-md-4">
+                      <label class="form-label fw-semibold"><i class="fas fa-user-tag me-1"></i> Role</label>
+                      <select class="form-select rounded-3 shadow-sm" id="userRole" required
+                        onchange="toggleDeptField()">
+                        <option value="">Select Role</option>
+                        <option value="Co-Ordinator">Co-Ordinator</option>
+                        <option value="HOD">HOD</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Student">Student</option>
+                      </select>
+                    </div>
+                    <!-- Department (Shown Only If Applicable) -->
+                    <div class="col-md-6 d-none" id="deptDiv">
+                      <label class="form-label fw-semibold"><i class="fas fa-building me-1"></i> Department</label>
+                      <select class="form-select rounded-3 shadow-sm">
+                        <option value="">Select Department</option>
+                        <option>Computer Science</option>
+                        <option>Software Engineering</option>
+                        <option>Information Technology</option>
+                      </select>
+                    </div>
+
+                    <!-- Username -->
+                    <div class="col-md-4">
+                      <label class="form-label fw-semibold"><i class="fas fa-user-circle me-1"></i> Username</label>
+                      <input type="text" class="form-control rounded-3 shadow-sm" required
+                        placeholder="Create a username">
+                    </div>
+
+                    <!-- Password -->
+                    <div class="col-md-4">
+                      <label class="form-label fw-semibold"><i class="fas fa-lock me-1"></i> Password</label>
+                      <input type="password" class="form-control rounded-3 shadow-sm" required
+                        placeholder="Create a password">
+                    </div>
+                  </div>
+
+                  <!-- Submit Button -->
+                  <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-success px-4 py-2 rounded-3 shadow-sm">
+                      <i class="fas fa-plus-circle me-2"></i>Add User
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <script>
+              function toggleDeptField() {
+                const role = document.getElementById('userRole').value;
+                const deptDiv = document.getElementById('deptDiv');
+
+                // Show Department field only for Student, Teacher, HOD
+                if (role === 'Student' || role === 'Teacher' || role === 'HOD') {
+                  deptDiv.classList.remove('d-none');
+                } else {
+                  deptDiv.classList.add('d-none');
+                }
+              }
+            </script>
+
+
+            <!-- 🕒 Pending Requests -->
+            <div class="card shadow-sm border-0 rounded-4">
+              <div style="background: linear-gradient(to right, #0A2670 30%, #5284e2); 
+            color: #fff; 
+            padding: 1rem 1.5rem;">
+                <h5 class="mb-0"><i class="fas fa-hourglass-half me-2"></i>Pending Requests</h5>
+              </div>
+              <div class="card-body">
+                <table class="table table-hover align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Requested Role</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Ali Khan</td>
+                      <td>alikhan@example.com</td>
+                      <td>Student</td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-success rounded-pill me-2">
+                          <i class="fas fa-check"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger rounded-pill">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <!-- More rows dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function toggleDeptField() {
+          const role = document.getElementById("userRole").value;
+          const deptDiv = document.getElementById("deptDiv");
+
+          if (role === "Student" || role === "Teacher" || role === "HOD") {
+            deptDiv.classList.remove("d-none");
+          } else {
+            deptDiv.classList.add("d-none");
+          }
+        }
+      </script>
+
+
+      <!--Footer-->
+      <footer class="text-center py-3 bg-light  border-top">
+        <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+      </footer>
+
+      <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+      <!-- Bootstrap JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+      <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+      <script>
+        const toggleBtn = document.getElementById("menu-toggle");
+        const sidebar = document.getElementById("sidebar-wrapper");
+        const closeBtn = document.getElementById("sidebar-close");
+
+        toggleBtn.addEventListener("click", () => {
+          sidebar.classList.remove("d-none");
+          toggleBtn.classList.add("d-none");
+          closeBtn.classList.remove("d-none");
+        });
+
+        closeBtn.addEventListener("click", () => {
+          sidebar.classList.add("d-none");
+          toggleBtn.classList.remove("d-none");
+          closeBtn.classList.add("d-none");
+        });
+
+        const imageInput = document.getElementById('profileImageInput');
+        const profilePreview = document.getElementById('profilePreview');
+
+        imageInput.addEventListener('change', function () {
+          const file = this.files[0];
+          if (file) {
+            profilePreview.src = URL.createObjectURL(file);
+            profilePreview.classList.remove('d-none');
+          }
+        });
+
+        function uploadProfilePicture() {
+          // Implement actual upload logic here (e.g., via AJAX or form submit)
+          alert("Profile picture uploaded successfully!");
+        }
+
+
+      </script>
+
+</body>
+
+</html>

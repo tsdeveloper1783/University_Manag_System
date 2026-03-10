@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="courses.html" class="text-decoration-none text-dark"><i class="fas fa-book me-2"></i>Courses Material</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="result.html" class="text-decoration-none text-dark"><i class="fas fa-chart-line me-2"></i>Result</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="fee.html" class="text-decoration-none text-dark"><i class="fas fa-file-invoice-dollar me-2"></i>Fee Voucher</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="Study_Scheme.html" class="text-decoration-none text-dark"><i class="fas fa-project-diagram me-2"></i>Study Schema</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+            <!-- Main Content -->
+             <div class="container py-4">
+    <h3 class="mb-4 fw-bold text-center">Course Material and Assignments</h3>
+
+    <div class="accordion" id="semesterAccordion">
+
+<!-- Semester 1 -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingOne">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#semesterOne" aria-expanded="false" aria-controls="semesterOne">
+      Semester 1
+    </button>
+  </h2>
+  <div id="semesterOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#semesterAccordion">
+    <div class="accordion-body p-0">
+      <table class="table table-bordered table-striped align-middle text-center mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>C/HR.</th>
+            <th>Course Content</th>
+            <th>Assignment</th>
+            <th>Project (4 C/HR.)</th> <!-- Added this header for consistency -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>URCI-5109</td>
+            <td>Introduction to ICT</td>
+            <td>3(2-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- Empty cell -->
+          </tr>
+          <tr>
+            <td>COMP-5101</td>
+            <td>Programming Fundamentals</td>
+            <td>4(3-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="Submit Project" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>URCE-5101</td>
+            <td>English-I (Grammar)</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>MATH-5101</td>
+            <td>Calculus-I</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>PHYS-5108</td>
+            <td>Applied Physics</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>URCI-5105</td>
+            <td>Islamic Studies</td>
+            <td>2(2-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>URCQ-5101</td>
+            <td>Quran Studies-I</td>
+            <td>Non-Credit</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Semester 2 -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingTwo">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#semesterTwo" aria-expanded="false" aria-controls="semesterTwo">
+      Semester 2
+    </button>
+  </h2>
+  <div id="semesterTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#semesterAccordion">
+    <div class="accordion-body p-0">
+      <table class="table table-bordered table-striped align-middle text-center mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>C/HR.</th>
+            <th>Course Content</th>
+            <th>Assignment</th>
+            <th>Project (4 C/HR.)</th> <!-- added column header -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>COMP-5102</td>
+            <td>Digital Logic and Design</td>
+            <td>4(3-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="Submit Project" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-5103</td>
+            <td>Object Oriented Programming</td>
+            <td>4(3-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="Submit Project" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>STAT-5201</td>
+            <td>Introductory Statistics</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>COMP-5104</td>
+            <td>Discrete Mathematics</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>URCE-5102</td>
+            <td>English-II: (Language Comprehension & Presentation Skills)</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>URCQ-5102</td>
+            <td>Quran Studies-II</td>
+            <td>Non-Credit</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+ <!-- Semester 3 --> 
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingThree">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#semesterThree" aria-expanded="false" aria-controls="semesterThree">
+      Semester 3
+    </button>
+  </h2>
+  <div id="semesterThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#semesterAccordion">
+    <div class="accordion-body p-0">
+      <table class="table table-bordered table-striped align-middle text-center mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>C/HR.</th>
+            <th>Course Content</th>
+            <th>Assignment</th>
+            <th>Project</th> <!-- New column header -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>COMP-5105</td>
+            <td>Computer Organization & Assembly Language</td>
+            <td>4(3-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="Submit Project" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-5106</td>
+            <td>Data Structures & Algorithms</td>
+            <td>4(3-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="Submit Project" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>URCE-5103</td>
+            <td>English III: (Academic Writing)</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- No project column for non 4(3-1) -->
+          </tr>
+          <tr>
+            <td>URCP-5106</td>
+            <td>Pakistan Studies</td>
+            <td>2(2-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>INFO-5202</td>
+            <td>Computer Networks</td>
+            <td>4(3-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="Submit Project" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>URCQ-5103</td>
+            <td>Quran Studies-III</td>
+            <td>Non-Credit</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Semester 4 -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingFour">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#semesterFour" aria-expanded="false" aria-controls="semesterFour">
+      Semester 4
+    </button>
+  </h2>
+  <div id="semesterFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#semesterAccordion">
+    <div class="accordion-body p-0">
+      <table class="table table-bordered table-striped align-middle text-center mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>C/HR.</th>
+            <th>Course Content</th>
+            <th>Assignment</th>
+            <th>Project</th>  <!-- New column for Project -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>COMP-5107</td>
+            <td>Operating System</td>
+            <td>4(3-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td>
+              <!-- Project submit icon for 4(3-1) credit hour -->
+              <a href="#" title="Submit Project" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-5108</td>
+            <td>Database Systems</td>
+            <td>4(3-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td>
+              <!-- Project submit icon for 4(3-1) credit hour -->
+              <a href="#" title="Submit Project" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>MATH-5102</td>
+            <td>Linear Algebra</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- No project submit icon for 3(3-0) -->
+          </tr>
+          <tr>
+            <td>SOFT-5301</td>
+            <td>Software Engineering</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- No project submit icon -->
+          </tr>
+          <tr>
+            <td>COMM-6109</td>
+            <td>Human Resource Management</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- No project submit icon -->
+          </tr>
+          <tr>
+            <td>URCQ-5104</td>
+            <td>Quran Studies-IV</td>
+            <td>Non-Credit</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- No project submit icon -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+ <!-- Semester 5 -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingFive">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#semesterFive" aria-expanded="false" aria-controls="semesterFive">
+      Semester 5
+    </button>
+  </h2>
+  <div id="semesterFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#semesterAccordion">
+    <div class="accordion-body p-0">
+      <table class="table table-bordered table-striped align-middle text-center mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>C/HR.</th>
+            <th>Course Content</th>
+            <th>Assignment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>COMP-6101</td>
+            <td>Theory of Automata</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-6102</td>
+            <td>Design &amp; Analysis of Algorithms</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-6103</td>
+            <td>Web Systems and Technologies</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-6104</td>
+            <td>Multimedia System and Design</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>MATH-5103</td>
+            <td>Calculus-II</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-6105</td>
+            <td>Object Oriented Analysis and Design</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>URCQ-6101</td>
+            <td>Quran Studies-V</td>
+            <td>Non-Credit</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Semester 6 -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingSix">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#semesterSix" aria-expanded="false" aria-controls="semesterSix">
+      Semester 6
+    </button>
+  </h2>
+  <div id="semesterSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#semesterAccordion">
+    <div class="accordion-body p-0">
+      <table class="table table-bordered table-striped align-middle text-center mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>C/HR.</th>
+            <th>Course Content</th>
+            <th>Assignment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>COMP-6106</td>
+            <td>Artificial Intelligence</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-6107</td>
+            <td>Compiler Construction</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-6108</td>
+            <td>Parallel &amp; Distributed Computing</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-6109</td>
+            <td>Information Security</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-6110</td>
+            <td>Mobile Application Development</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>BUSS-5106</td>
+            <td>Introduction to Management</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>URCQ-6102</td>
+            <td>Quran Studies-VI</td>
+            <td>Non-Credit</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Semester 7 -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingSeven">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#semesterSeven" aria-expanded="false" aria-controls="semesterSeven">
+      Semester 7
+    </button>
+  </h2>
+  <div id="semesterSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#semesterAccordion">
+    <div class="accordion-body p-0">
+      <table class="table table-bordered table-striped align-middle text-center mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>C/HR.</th>
+            <th>Course Content</th>
+            <th>Assignment</th>
+            <th>Project</th> <!-- New Project column -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>COMP-6111</td>
+            <td>Final Year Project-I</td>
+            <td>3(0-3)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- No project submit icon for this -->
+          </tr>
+          <tr>
+            <td>DATA-6101</td>
+            <td>Data Mining</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- No project submit icon for this -->
+          </tr>
+          <tr>
+            <td>BUSS-6112</td>
+            <td>Entrepreneurship</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- No project submit icon for this -->
+          </tr>
+          <tr>
+            <td>COMP-6112</td>
+            <td>Database Administration and Management</td>
+            <td>4(3-1)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="Submit Project" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td> <!-- Project submit icon ONLY here -->
+          </tr>
+          <tr>
+            <td>URCQ-6103</td>
+            <td>Quran Studies-VII</td>
+            <td>Non-Credit</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+            <td></td> <!-- No project submit icon for this -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Semester 8 -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingEight">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#semesterEight" aria-expanded="false" aria-controls="semesterEight">
+      Semester 8
+    </button>
+  </h2>
+  <div id="semesterEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#semesterAccordion">
+    <div class="accordion-body p-0">
+      <table class="table table-bordered table-striped align-middle text-center mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>C/HR.</th>
+            <th>Course Content</th>
+            <th>Assignment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>COMP-6113</td>
+            <td>Final Year Project-II</td>
+            <td>3(0-3)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>COMP-6114</td>
+            <td>Professional Practice</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>DATA-6102</td>
+            <td>Data Warehousing</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>BUSS-5102</td>
+            <td>Financial Accounting</td>
+            <td>3(3-0)</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>URCQ-6104</td>
+            <td>Quran Studies-VIII</td>
+            <td>Non-Credit</td>
+            <td>
+              <a href="#" title="View Content" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Content" class="icon-link text-secondary"><i class="fas fa-download fa-lg"></i></a>
+            </td>
+            <td>
+              <a href="#" title="View Assignment" class="icon-link text-secondary me-3"><i class="fas fa-eye fa-lg"></i></a>
+              <a href="#" title="Download Assignment" class="icon-link text-secondary me-3"><i class="fas fa-download fa-lg"></i></a>
+              <a href="#" title="Submit Assignment" class="icon-link text-secondary"><i class="fas fa-upload fa-lg"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+
+        
+    </div>
+  </div>
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+  </script>
+
+</body>
+</html> 

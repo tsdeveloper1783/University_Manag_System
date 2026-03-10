@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="courses.html" class="text-decoration-none text-dark"><i class="fas fa-book me-2"></i>Courses Material</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="result.html" class="text-decoration-none text-dark"><i class="fas fa-chart-line me-2"></i>Result</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="fee.html" class="text-decoration-none text-dark"><i class="fas fa-file-invoice-dollar me-2"></i>Fee Voucher</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="Study_Scheme.html" class="text-decoration-none text-dark"><i class="fas fa-project-diagram me-2"></i>Study Schema</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+            <!-- Main Content -->
+<!-- Result Summary -->
+<div class="container-fluid p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold">Result Summary</h3>
+    <a href="transcript.pdf" class="btn btn-primary" download>
+      <i class="fa fa-download me-2"></i>Download Transcript
+    </a>
+  </div>
+
+  <!-- Current Semester Result -->
+  <div class="card shadow-sm rounded-3 border-0 mb-4">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center align-middle">
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Mid Marks</th>
+              <th>Final Marks</th>
+              <th>Sessional Marks</th>
+              <th>Total Marks</th>
+              <th>Grade Point</th>
+              <th>Grade</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Sample Courses -->
+            <tr>
+              <td>Database Management Systems</td>
+              <td>22</td>
+              <td>41</td>
+              <td>10</td>
+              <td>73</td>
+              <td>3.3</td>
+              <td>B+</td>
+              <td>Good</td>
+            </tr>
+            <tr>
+              <td>Operating Systems</td>
+              <td>19</td>
+              <td>39</td>
+              <td>12</td>
+              <td>70</td>
+              <td>3.0</td>
+              <td>B</td>
+              <td>Satisfactory</td>
+            </tr>
+            <tr>
+              <td>Web Technologies</td>
+              <td>25</td>
+              <td>42</td>
+              <td>13</td>
+              <td>80</td>
+              <td>3.7</td>
+              <td>A</td>
+              <td>Very Good</td>
+            </tr>
+            <tr>
+              <td>Software Engineering</td>
+              <td>21</td>
+              <td>40</td>
+              <td>14</td>
+              <td>75</td>
+              <td>3.4</td>
+              <td>B+</td>
+              <td>Good</td>
+            </tr>
+            <tr>
+              <td>Discrete Structures</td>
+              <td>20</td>
+              <td>35</td>
+              <td>15</td>
+              <td>70</td>
+              <td>3.0</td>
+              <td>B</td>
+              <td>Satisfactory</td>
+            </tr>
+            <!-- Totals Row -->
+            <tr class="table-primary fw-bold">
+              <td colspan="4" class="text-end">Total</td>
+              <td>368</td>
+              <td>16.4</td>
+              <td>-</td>
+              <td>CGPA: 3.28</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+ <h4 class="fw-bold mb-3">Semester-wise Academic Summary (1 to 8)</h4>
+
+<div class="accordion" id="semesterAccordion">
+
+  <!-- Semester 1 -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading1">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+        Semester 1
+      </button>
+    </h2>
+    <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#semesterAccordion">
+      <div class="accordion-body">
+        <p><strong>GPA:</strong> 3.10</p>
+        <p><strong>Total Marks:</strong> 350</p>
+        <p><strong>CGPA:</strong> 3.10</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semester 2 -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading2">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+        Semester 2
+      </button>
+    </h2>
+    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#semesterAccordion">
+      <div class="accordion-body">
+        <p><strong>GPA:</strong> 3.25</p>
+        <p><strong>Total Marks:</strong> 360</p>
+        <p><strong>CGPA:</strong> 3.18</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semester 3 -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading3">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+        Semester 3
+      </button>
+    </h2>
+    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#semesterAccordion">
+      <div class="accordion-body">
+        <p><strong>GPA:</strong> 3.40</p>
+        <p><strong>Total Marks:</strong> 370</p>
+        <p><strong>CGPA:</strong> 3.25</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semester 4 -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading4">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+        Semester 4
+      </button>
+    </h2>
+    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#semesterAccordion">
+      <div class="accordion-body">
+        <p><strong>GPA:</strong> 3.20</p>
+        <p><strong>Total Marks:</strong> 355</p>
+        <p><strong>CGPA:</strong> 3.24</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semester 5 -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading5">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+        Semester 5
+      </button>
+    </h2>
+    <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#semesterAccordion">
+      <div class="accordion-body">
+        <p><strong>GPA:</strong> 3.28</p>
+        <p><strong>Total Marks:</strong> 368</p>
+        <p><strong>CGPA:</strong> 3.25</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semester 6 -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading6">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+        Semester 6
+      </button>
+    </h2>
+    <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6" data-bs-parent="#semesterAccordion">
+      <div class="accordion-body">
+        <p><strong>GPA:</strong> 3.35</p>
+        <p><strong>Total Marks:</strong> 372</p>
+        <p><strong>CGPA:</strong> 3.28</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semester 7 -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading7">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+        Semester 7
+      </button>
+    </h2>
+    <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7" data-bs-parent="#semesterAccordion">
+      <div class="accordion-body">
+        <p><strong>GPA:</strong> 3.50</p>
+        <p><strong>Total Marks:</strong> 380</p>
+        <p><strong>CGPA:</strong> 3.31</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semester 8 -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading8">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+        Semester 8
+      </button>
+    </h2>
+    <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="heading8" data-bs-parent="#semesterAccordion">
+      <div class="accordion-body">
+        <p><strong>GPA:</strong> 3.60</p>
+        <p><strong>Total Marks:</strong> 390</p>
+        <p><strong>CGPA:</strong> 3.37</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Final Summary -->
+<div class="mt-4 p-3 bg-light rounded border">
+  <h5 class="fw-bold">Overall Academic Summary</h5>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Total Marks:</span>
+      <span class="fw-semibold">2,945</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Total GPA (Sum of All Semesters):</span>
+      <span class="fw-semibold">27.68</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+      <span>CGPA (Out of 4.00):</span>
+      <span class="fw-semibold text-success">3.46</span>
+    </li>
+  </ul>
+</div>
+
+
+        
+    </div>
+  </div>
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+  </script>
+
+</body>
+</html> 

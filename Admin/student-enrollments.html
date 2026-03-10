@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper"
+      style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="register-users.html" class="text-decoration-none text-dark"><i
+              class="fas fa-user-plus me-2"></i>Register Users</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="approve-teachers.html" class="text-decoration-none text-dark"><i
+              class="fas fa-user-check me-2"></i>Approve Teachers</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-semester.html" class="text-decoration-none text-dark"><i
+              class="fas fa-file-alt me-2"></i>Manage Semester</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-courses.html" class="text-decoration-none text-dark"><i
+              class="fas fa-book-open me-2"></i>Manage Courses</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="student-enrollments.html" class="text-decoration-none text-dark"><i
+              class="fas fa-user-graduate me-2"></i>Student Enrollment</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="fee-management.html" class="text-decoration-none text-dark"><i
+              class="fas fa-money-check-alt me-2"></i>Fee Management</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="activity-monitor.html" class="text-decoration-none text-dark"><i
+              class="fas fa-chart-line me-2"></i>Activity Monitor</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="generate-reports.html" class="text-decoration-none text-dark"><i
+              class="fas fa-file-download me-2"></i>Generate Reports</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User"
+                id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button"
+                style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown"
+                style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="container my-5">
+        <!-- Heading -->
+        <div class="mb-4">
+          <h2 class="fw-bold text-gradient">
+            <i class="fas fa-users me-2"></i>Manage Student Enrollments
+          </h2>
+          <p class="text-muted">Add students manually or via Excel sheet. Students are shown department-wise with full
+            account info.</p>
+        </div>
+
+        <!-- Upload Excel Section -->
+        <div class="card border-0 shadow-lg rounded-4 mb-5">
+          <div class="card-header bg-gradient fw-bold text-white rounded-top-4">
+            <i class="fas fa-file-upload me-2"></i>Upload Students (Excel Sheet)
+          </div>
+          <div class="card-body bg-light rounded-bottom-4">
+            <form id="excelUploadForm" class="row g-3 align-items-center">
+              <div class="col-md-8">
+                <label for="excelFile" class="form-label fw-semibold">Select Excel File <span
+                    class="text-danger">*</span></label>
+                <input type="file" class="form-control rounded-3 shadow-sm" id="excelFile" accept=".xlsx, .xls"
+                  required>
+                <small class="text-muted fst-italic">Usernames will be based on Roll No. Default password:
+                  <code>abc-123-xyz</code></small>
+              </div>
+              <div class="col-md-4 d-grid">
+                <button style="background: linear-gradient(to right, #0A2670 30%, #5284e2); 
+            color: #fff;" type="submit" class="btn fw-bold py-2 rounded-3">
+                  <i class="fas fa-upload me-1"></i> Upload & Import
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- 🔘 Toggle Button -->
+        <div class="d-flex justify-content-end mb-3">
+
+          <button style="background: linear-gradient(to right, #0A2670 30%, #5284e2); 
+            color: #fff; 
+            align-items: center;" class="btn btn fw-semibold py-2 rounded-3" type="button" data-bs-toggle="collapse"
+            data-bs-target="#addSingleStudentForm" aria-expanded="false">
+            <i class="fas fa-user-plus me-2"></i> Add Single Student
+          </button>
+        </div>
+
+        <!-- 🔽 Add Single Student Form (Collapsible) -->
+        <div class="collapse" id="addSingleStudentForm">
+          <div class="card shadow-lg border-0 rounded-4 mb-4">
+            <div class="card-header text-white fw-bold rounded-top-4"
+              style="background: linear-gradient(135deg, #6f42c1, #0d6efd);">
+              <i class="fas fa-user-edit me-2"></i> Add Single Student
+            </div>
+            <div class="card-body px-4 py-4 bg-light rounded-bottom-4">
+              <form id="singleStudentForm" autocomplete="off">
+                <div class="row g-4 align-items-end">
+
+                  <!-- 👤 Full Name -->
+                  <div class="col-md-4">
+                    <label class="form-label fw-semibold">Full Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-3 shadow-sm" id="singleName"
+                      placeholder="e.g. Ayesha Khan" required />
+                  </div>
+
+                  <!-- 📧 Email -->
+                  <div class="col-md-4">
+                    <label class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control rounded-3 shadow-sm" id="singleEmail"
+                      placeholder="e.g. ayesha@example.com" required />
+                  </div>
+
+                  <!-- 🏛️ Department -->
+                  <div class="col-md-4">
+                    <label class="form-label fw-semibold">Department <span class="text-danger">*</span></label>
+                    <select class="form-select rounded-3 shadow-sm" id="singleDept" required>
+                      <option value="" disabled selected>Select Department</option>
+                      <option>Computer Science</option>
+                      <option>Software Engineering</option>
+                      <option>Information Technology</option>
+                    </select>
+                  </div>
+
+                  <!-- 🆔 Roll No -->
+                  <div class="col-md-4">
+                    <label class="form-label fw-semibold">Roll No <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-3 shadow-sm" id="singleRoll"
+                      placeholder="e.g. CS-101" required />
+                  </div>
+                  <!-- 🔐 Password (Readonly Default) -->
+                  <div class="col-md-4">
+                    <label class="form-label fw-semibold">Password</label>
+                    <input type="text" class="form-control rounded-3 shadow-sm bg-light" value="abc-123-xyz" readonly />
+                  </div>
+
+                  <!-- 📥 Submit -->
+                  <div class="col-md-2 d-grid mt-3">
+                    <button type="submit" class="btn btn-gradient text-white fw-semibold rounded-3">
+                      <i class="fas fa-check-circle me-1"></i> Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🌈 Button Gradient Styling -->
+        <style>
+          .btn-gradient {
+            background: linear-gradient(to right, #0d6efd, #6f42c1);
+            border: none;
+            transition: 0.3s ease-in-out;
+          }
+
+          .btn-gradient:hover {
+            background: linear-gradient(to right, #0dcaf0, #6610f2);
+            transform: scale(1.05);
+          }
+        </style>
+
+        <!-- 📘 Enrolled Students Dept-wise Cards with Table -->
+        <div class="container mt-5">
+          <h4 class="fw-bold mb-4">📘 Enrolled Students (Department-wise)</h4>
+
+          <div class="row g-4">
+
+            <!-- 🔹 Department Card Template -->
+            <div class="col-md-6">
+              <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-primary text-white fw-bold rounded-top-4">
+                  <i class="fas fa-laptop-code me-2"></i> Computer Science
+                </div>
+                <div class="card-body bg-light rounded-bottom-4 p-3">
+                  <table class="table table-sm table-bordered mb-0 align-middle">
+                    <thead class="table-primary text-center">
+                      <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Ali Raza</td>
+                        <td>CS-1001</td>
+                        <td>CS-1001</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                      <tr>
+                        <td>Hina Rauf</td>
+                        <td>CS-1002</td>
+                        <td>CS-1002</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- 🔹 Software Engineering -->
+            <div class="col-md-6">
+              <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-success text-white fw-bold rounded-top-4">
+                  <i class="fas fa-code me-2"></i> Software Engineering
+                </div>
+                <div class="card-body bg-light rounded-bottom-4 p-3">
+                  <table class="table table-sm table-bordered mb-0 align-middle">
+                    <thead class="table-success text-center">
+                      <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Sarah Malik</td>
+                        <td>SE-2001</td>
+                        <td>SE-2001</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                      <tr>
+                        <td>Ahmed Khan</td>
+                        <td>SE-2002</td>
+                        <td>SE-2002</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- 🔹 Information Technology -->
+            <div class="col-md-6">
+              <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-info text-white fw-bold rounded-top-4">
+                  <i class="fas fa-network-wired me-2"></i> Information Technology
+                </div>
+                <div class="card-body bg-light rounded-bottom-4 p-3">
+                  <table class="table table-sm table-bordered mb-0 align-middle">
+                    <thead class="table-info text-center">
+                      <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Usman Tariq</td>
+                        <td>IT-3001</td>
+                        <td>IT-3001</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                      <tr>
+                        <td>Laiba Noor</td>
+                        <td>IT-3002</td>
+                        <td>IT-3002</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- 🔹 Artificial Intelligence -->
+            <div class="col-md-6">
+              <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-warning text-dark fw-bold rounded-top-4">
+                  <i class="fas fa-robot me-2"></i> Artificial Intelligence
+                </div>
+                <div class="card-body bg-light rounded-bottom-4 p-3">
+                  <table class="table table-sm table-bordered mb-0 align-middle">
+                    <thead class="table-warning text-center">
+                      <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Rabia Khan</td>
+                        <td>AI-4001</td>
+                        <td>AI-4001</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                      <tr>
+                        <td>Waqas Malik</td>
+                        <td>AI-4002</td>
+                        <td>AI-4002</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- 🔹 Cyber Security -->
+            <div class="col-md-6">
+              <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-danger text-white fw-bold rounded-top-4">
+                  <i class="fas fa-shield-alt me-2"></i> Cyber Security
+                </div>
+                <div class="card-body bg-light rounded-bottom-4 p-3">
+                  <table class="table table-sm table-bordered mb-0 align-middle">
+                    <thead class="table-danger text-center">
+                      <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Sumaira Iqbal</td>
+                        <td>CY-5001</td>
+                        <td>CY-5001</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                      <tr>
+                        <td>Omar Farooq</td>
+                        <td>CY-5002</td>
+                        <td>CY-5002</td>
+                        <td>abc-123-xyz</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <style>
+          .text-gradient {
+            background: linear-gradient(to right, #0d6efd, #6f42c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+
+          .bg-gradient {
+            background: linear-gradient(to right, #0d6efd, #6f42c1);
+          }
+
+          .btn-gradient {
+            background: linear-gradient(to right, #0d6efd, #6f42c1);
+            border: none;
+            transition: all 0.3s ease;
+          }
+
+          .btn-gradient:hover {
+            background: linear-gradient(to right, #0dcaf0, #6f42c1);
+            transform: scale(1.05);
+          }
+        </style>
+
+
+        <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+        <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header custom-header">
+                <h5 class="modal-title">Account Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <!-- First Name -->
+                <div class="mb-3">
+                  <h6>First Name</h6>
+                  <input type="text" class="form-control" placeholder="Enter first name" />
+                </div>
+
+                <!-- Last Name -->
+                <div class="mb-3">
+                  <h6>Last Name</h6>
+                  <input type="text" class="form-control" placeholder="Enter last name" />
+                </div>
+
+                <!-- Phone Number -->
+                <div class="mb-3">
+                  <h6>Phone Number</h6>
+                  <input type="tel" class="form-control" placeholder="Enter phone number" />
+                </div>
+
+                <!-- Change Password -->
+                <div class="mb-4">
+                  <h6>Change Password</h6>
+                  <input type="password" class="form-control mb-2" placeholder="Current Password" />
+                  <input type="password" class="form-control mb-2" placeholder="New Password" />
+                  <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+                  <button class="btn btn-primary btn-sm">Change Password</button>
+                </div>
+
+                <!-- Change Profile Picture -->
+                <div class="mb-4">
+                  <h6>Change Profile Picture</h6>
+                  <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+                  <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none"
+                    width="120" />
+                  <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Footer-->
+        <footer class="text-center py-3 bg-light  border-top">
+          <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+        </footer>
+
+        <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+        <script>
+          const toggleBtn = document.getElementById("menu-toggle");
+          const sidebar = document.getElementById("sidebar-wrapper");
+          const closeBtn = document.getElementById("sidebar-close");
+
+          toggleBtn.addEventListener("click", () => {
+            sidebar.classList.remove("d-none");
+            toggleBtn.classList.add("d-none");
+            closeBtn.classList.remove("d-none");
+          });
+
+          closeBtn.addEventListener("click", () => {
+            sidebar.classList.add("d-none");
+            toggleBtn.classList.remove("d-none");
+            closeBtn.classList.add("d-none");
+          });
+
+          const imageInput = document.getElementById('profileImageInput');
+          const profilePreview = document.getElementById('profilePreview');
+
+          imageInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+              profilePreview.src = URL.createObjectURL(file);
+              profilePreview.classList.remove('d-none');
+            }
+          });
+
+          function uploadProfilePicture() {
+            // Implement actual upload logic here (e.g., via AJAX or form submit)
+            alert("Profile picture uploaded successfully!");
+          }
+
+
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Head of Department Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="approve-course-content.html" class="text-decoration-none text-dark"><i class="fas fa-check-circle"></i> Approve Content</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="view-performance.html" class="text-decoration-none text-dark"><i class="fas fa-chart-bar me-2"></i>View Performance</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="assign-teachers.html" class="text-decoration-none text-dark"><i class="fas fa-chalkboard-teacher me-2"></i>Assign Teachers</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="class-progress.html" class="text-decoration-none text-dark"><i class="fas fa-tasks me-2"></i>Class Progress</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-events.html" class="text-decoration-none text-dark"><i class="fas fa-calendar-alt me-2"></i>Manage Events</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="approve-enrollments.html" class="text-decoration-none text-dark"><i class="fas fa-user-check me-2"></i>Approve Students</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="collect-feedback.html" class="text-decoration-none text-dark"><i class="fas fa-comments me-2"></i>Collect Feedback</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="generate-reports.html" class="text-decoration-none text-dark"><i class="fas fa-file-export me-2"></i>Generate Reports</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+           
+   <main id="mainContent" class="p-4">
+  <div class="container-fluid">
+    <h2 class="mb-4">Generate Reports - Semester Wise</h2>
+    <div class="mb-3">
+      <label for="semesterSelect" class="form-label fw-bold">Select Semester:</label>
+      <select id="semesterSelect" class="form-select">
+        <option value="1">Semester 1</option>
+        <option value="2">Semester 2</option>
+        <option value="3">Semester 3</option>
+        <option value="4">Semester 4</option>
+        <option value="5">Semester 5</option>
+        <option value="6">Semester 6</option>
+        <option value="7">Semester 7</option>
+        <option value="8">Semester 8</option>
+      </select>
+    </div>
+
+    <!-- STUDENT REPORTS SECTION -->
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">Student Performance Report</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr id="studentTableHeader">
+                <th>Student Name</th>
+                <!-- Subjects injected by JS -->
+                <th>Total Marks</th>
+                <th>GPA</th>
+                <th>Attendance %</th>
+                <th>Remarks</th>
+              </tr>
+            </thead>
+            <tbody id="studentPerformanceBody">
+              <!-- Filled dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-warning">Low Performing Students (GPA < 2.5)</div>
+      <div class="card-body">
+        <ul id="lowPerformers" class="list-group"></ul>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-success text-white">Top Performing Students</div>
+      <div class="card-body">
+        <ul id="topPerformers" class="list-group"></ul>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-danger text-white">Attendance Report (&lt; 75%)</div>
+      <div class="card-body">
+        <ul id="lowAttendance" class="list-group"></ul>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-secondary text-white">Failing Students Report</div>
+      <div class="card-body">
+        <ul id="failingStudents" class="list-group"></ul>
+      </div>
+    </div>
+
+    <!-- TEACHER REPORTS SECTION -->
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white">Subject-Wise Teacher Performance</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Teacher</th>
+                <th>Subject</th>
+                <th>Avg. Student Marks</th>
+                <th>Lectures Delivered</th>
+                <th>Student Attendance</th>
+                <th>Teacher Rating</th>
+              </tr>
+            </thead>
+            <tbody id="teacherPerformanceBody">
+              <!-- Filled dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-dark text-white">Teacher Attendance Report</div>
+      <div class="card-body">
+        <ul id="teacherAttendance" class="list-group"></ul>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-light">Comparative Report (Same Subject by Different Teachers)</div>
+      <div class="card-body">
+        <canvas id="comparativeChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const dummyData = {
+  1: {
+    teachers: [
+      { name: "Mr. Ali", subject: "Math", avgMarks: 84, lectures: 38, attendance: "92%", rating: 4.3 },
+      { name: "Ms. Fatima", subject: "English", avgMarks: 79, lectures: 40, attendance: "95%", rating: 4.6 },
+      { name: "Dr. Imran", subject: "Computer", avgMarks: 88, lectures: 35, attendance: "90%", rating: 4.5 }
+    ],
+    students: [
+      { name: "Ahmed", attendance: 87 },
+      { name: "Sara", attendance: 91 },
+      { name: "Bilal", attendance: 73 },
+      { name: "Zara", attendance: 68 },
+      { name: "Usman", attendance: 80 }
+    ],
+    comparison: [
+      { teacher: "Mr. Ali", subject: "Math", score: 84 },
+      { teacher: "Ms. Fatima", subject: "English", score: 79 },
+      { teacher: "Dr. Imran", subject: "Computer", score: 88 }
+    ]
+  },
+  2: {
+    teachers: [
+      { name: "Ms. Sana", subject: "Physics", avgMarks: 81, lectures: 36, attendance: "88%", rating: 4.1 },
+      { name: "Mr. Kamran", subject: "Chemistry", avgMarks: 75, lectures: 38, attendance: "90%", rating: 4.0 },
+      { name: "Dr. Nadia", subject: "Biology", avgMarks: 83, lectures: 33, attendance: "85%", rating: 4.4 }
+    ],
+    students: [
+      { name: "Ayesha", attendance: 85 },
+      { name: "Bilal", attendance: 78 },
+      { name: "Faraz", attendance: 69 },
+      { name: "Hira", attendance: 72 },
+      { name: "Zain", attendance: 90 }
+    ],
+    comparison: [
+      { teacher: "Ms. Sana", subject: "Physics", score: 81 },
+      { teacher: "Mr. Kamran", subject: "Chemistry", score: 75 },
+      { teacher: "Dr. Nadia", subject: "Biology", score: 83 }
+    ]
+  },
+  3: {
+    teachers: [
+      { name: "Mr. Asim", subject: "Calculus", avgMarks: 79, lectures: 34, attendance: "87%", rating: 4.2 },
+      { name: "Ms. Noor", subject: "English Literature", avgMarks: 82, lectures: 40, attendance: "93%", rating: 4.5 },
+      { name: "Dr. Sami", subject: "Programming", avgMarks: 90, lectures: 38, attendance: "92%", rating: 4.7 }
+    ],
+    students: [
+      { name: "Khalid", attendance: 80 },
+      { name: "Maryam", attendance: 88 },
+      { name: "Omar", attendance: 74 },
+      { name: "Rabia", attendance: 70 },
+      { name: "Tariq", attendance: 92 }
+    ],
+    comparison: [
+      { teacher: "Mr. Asim", subject: "Calculus", score: 79 },
+      { teacher: "Ms. Noor", subject: "English Literature", score: 82 },
+      { teacher: "Dr. Sami", subject: "Programming", score: 90 }
+    ]
+  },
+  4: {
+    teachers: [
+      { name: "Ms. Amina", subject: "Statistics", avgMarks: 80, lectures: 37, attendance: "89%", rating: 4.3 },
+      { name: "Mr. Rashid", subject: "Economics", avgMarks: 77, lectures: 39, attendance: "86%", rating: 4.1 },
+      { name: "Dr. Zain", subject: "Data Science", avgMarks: 91, lectures: 40, attendance: "94%", rating: 4.8 }
+    ],
+    students: [
+      { name: "Sana", attendance: 90 },
+      { name: "Fahad", attendance: 79 },
+      { name: "Inaam", attendance: 67 },
+      { name: "Junaid", attendance: 74 },
+      { name: "Laiba", attendance: 85 }
+    ],
+    comparison: [
+      { teacher: "Ms. Amina", subject: "Statistics", score: 80 },
+      { teacher: "Mr. Rashid", subject: "Economics", score: 77 },
+      { teacher: "Dr. Zain", subject: "Data Science", score: 91 }
+    ]
+  },
+  5: {
+    teachers: [
+      { name: "Mr. Imtiaz", subject: "Machine Learning", avgMarks: 87, lectures: 39, attendance: "90%", rating: 4.6 },
+      { name: "Ms. Shazia", subject: "Philosophy", avgMarks: 75, lectures: 35, attendance: "88%", rating: 4.0 },
+      { name: "Dr. Faisal", subject: "Artificial Intelligence", avgMarks: 92, lectures: 42, attendance: "95%", rating: 4.9 }
+    ],
+    students: [
+      { name: "Ali", attendance: 83 },
+      { name: "Nida", attendance: 92 },
+      { name: "Raza", attendance: 78 },
+      { name: "Saira", attendance: 69 },
+      { name: "Talha", attendance: 85 }
+    ],
+    comparison: [
+      { teacher: "Mr. Imtiaz", subject: "Machine Learning", score: 87 },
+      { teacher: "Ms. Shazia", subject: "Philosophy", score: 75 },
+      { teacher: "Dr. Faisal", subject: "Artificial Intelligence", score: 92 }
+    ]
+  },
+  6: {
+    teachers: [
+      { name: "Ms. Nadia", subject: "Network Security", avgMarks: 83, lectures: 36, attendance: "91%", rating: 4.4 },
+      { name: "Mr. Javed", subject: "Cryptography", avgMarks: 78, lectures: 38, attendance: "89%", rating: 4.1 },
+      { name: "Dr. Khalid", subject: "Cloud Computing", avgMarks: 85, lectures: 40, attendance: "93%", rating: 4.5 }
+    ],
+    students: [
+      { name: "Hassan", attendance: 88 },
+      { name: "Iqra", attendance: 84 },
+      { name: "Jamal", attendance: 70 },
+      { name: "Laila", attendance: 75 },
+      { name: "Noman", attendance: 82 }
+    ],
+    comparison: [
+      { teacher: "Ms. Nadia", subject: "Network Security", score: 83 },
+      { teacher: "Mr. Javed", subject: "Cryptography", score: 78 },
+      { teacher: "Dr. Khalid", subject: "Cloud Computing", score: 85 }
+    ]
+  },
+  7: {
+    teachers: [
+      { name: "Mr. Asad", subject: "Operating Systems", avgMarks: 80, lectures: 37, attendance: "87%", rating: 4.3 },
+      { name: "Ms. Maria", subject: "Software Engineering", avgMarks: 82, lectures: 39, attendance: "90%", rating: 4.4 },
+      { name: "Dr. Farooq", subject: "Database Systems", avgMarks: 89, lectures: 41, attendance: "92%", rating: 4.7 }
+    ],
+    students: [
+      { name: "Qasim", attendance: 81 },
+      { name: "Rida", attendance: 86 },
+      { name: "Sami", attendance: 72 },
+      { name: "Taha", attendance: 76 },
+      { name: "Uzma", attendance: 88 }
+    ],
+    comparison: [
+      { teacher: "Mr. Asad", subject: "Operating Systems", score: 80 },
+      { teacher: "Ms. Maria", subject: "Software Engineering", score: 82 },
+      { teacher: "Dr. Farooq", subject: "Database Systems", score: 89 }
+    ]
+  },
+  8: {
+    teachers: [
+      { name: "Ms. Hina", subject: "Artificial Intelligence", avgMarks: 88, lectures: 40, attendance: "94%", rating: 4.8 },
+      { name: "Mr. Nadeem", subject: "Robotics", avgMarks: 81, lectures: 38, attendance: "90%", rating: 4.3 },
+      { name: "Dr. Yasir", subject: "Data Mining", avgMarks: 85, lectures: 42, attendance: "92%", rating: 4.5 }
+    ],
+    students: [
+      { name: "Wasim", attendance: 89 },
+      { name: "Zainab", attendance: 91 },
+      { name: "Amir", attendance: 77 },
+      { name: "Bushra", attendance: 74 },
+      { name: "Daniyal", attendance: 80 }
+    ],
+    comparison: [
+      { teacher: "Ms. Hina", subject: "Artificial Intelligence", score: 88 },
+      { teacher: "Mr. Nadeem", subject: "Robotics", score: 81 },
+      { teacher: "Dr. Yasir", subject: "Data Mining", score: 85 }
+    ]
+  }
+};
+
+    document.getElementById('semesterSelect').addEventListener('change', function () {
+      const semester = this.value;
+      const data = dummyData[semester];
+
+      const headerRow = document.getElementById('studentTableHeader');
+      const studentBody = document.getElementById('studentPerformanceBody');
+      studentBody.innerHTML = '';
+      headerRow.innerHTML = '<th>Student Name</th>';
+
+      const subjectList = data.teachers.map(t => t.subject);
+      subjectList.forEach(subject => {
+        headerRow.innerHTML += `<th>${subject}</th>`;
+      });
+      headerRow.innerHTML += `
+        <th>Total Marks</th>
+        <th>GPA</th>
+        <th>Attendance %</th>
+        <th>Remarks</th>
+      `;
+
+      const lowPerformers = [], topPerformers = [], lowAttendance = [], failingStudents = [];
+
+      data.students.forEach(std => {
+        let total = 0, subjectMarksHTML = '';
+        subjectList.forEach(subject => {
+          const mark = Math.floor(Math.random() * 21) + 80; // 80-100
+          subjectMarksHTML += `<td>${mark}</td>`;
+          total += mark;
+        });
+
+        const maxTotal = subjectList.length * 100;
+        const gpa = ((total / maxTotal) * 4).toFixed(2);
+
+        const row = `
+          <tr>
+            <td>${std.name}</td>
+            ${subjectMarksHTML}
+            <td>${total}</td>
+            <td>${gpa}</td>
+            <td>${std.attendance}%</td>
+            <td>${gpa < 2.5 ? 'Needs Improvement' : 'Good'}</td>
+          </tr>`;
+        studentBody.insertAdjacentHTML('beforeend', row);
+
+        if (gpa < 2.5) lowPerformers.push(`${std.name} - GPA: ${gpa}`);
+        if (gpa >= 3.5) topPerformers.push(`${std.name} - GPA: ${gpa}`);
+        if (std.attendance < 75) lowAttendance.push(`${std.name} - ${std.attendance}%`);
+        if ((total / subjectList.length) < 50) failingStudents.push(`${std.name} - Avg: ${(total / subjectList.length).toFixed(2)}`);
+      });
+
+      document.getElementById('lowPerformers').innerHTML = lowPerformers.map(s => `<li class="list-group-item">${s}</li>`).join('');
+      document.getElementById('topPerformers').innerHTML = topPerformers.map(s => `<li class="list-group-item">${s}</li>`).join('');
+      document.getElementById('lowAttendance').innerHTML = lowAttendance.map(s => `<li class="list-group-item">${s}</li>`).join('');
+      document.getElementById('failingStudents').innerHTML = failingStudents.map(s => `<li class="list-group-item">${s}</li>`).join('');
+
+      const teacherBody = document.getElementById('teacherPerformanceBody');
+      teacherBody.innerHTML = '';
+      document.getElementById('teacherAttendance').innerHTML = '';
+
+      data.teachers.forEach(teacher => {
+        teacherBody.innerHTML += `
+          <tr>
+            <td>${teacher.name}</td>
+            <td>${teacher.subject}</td>
+            <td>${teacher.avgMarks}</td>
+            <td>${teacher.lectures}</td>
+            <td>${teacher.attendance}</td>
+            <td>${teacher.rating}</td>
+          </tr>`;
+        if (parseInt(teacher.attendance) < 80) {
+          document.getElementById('teacherAttendance').innerHTML += `<li class="list-group-item">${teacher.name} - ${teacher.attendance}</li>`;
+        }
+      });
+
+      const ctx = document.getElementById('comparativeChart').getContext('2d');
+      if (window.comparativeChartInstance) window.comparativeChartInstance.destroy();
+      window.comparativeChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: data.comparison.map(d => `${d.teacher} (${d.subject})`),
+          datasets: [{
+            label: 'Average Score',
+            data: data.comparison.map(d => d.score),
+            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, max: 100 }
+          }
+        }
+      });
+    });
+
+    document.getElementById('semesterSelect').dispatchEvent(new Event('change'));
+  </script>
+</main>
+
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+    
+  </script>
+
+</body>
+</html> 

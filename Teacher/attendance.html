@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="materials.html" class="text-decoration-none text-dark">
+            <i class="fas fa-upload me-2"></i>Materials
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="grades.html" class="text-decoration-none text-dark">
+            <i class="fas fa-marker me-2"></i>Grades
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="performance.html" class="text-decoration-none text-dark">
+            <i class="fas fa-chart-line me-2"></i>Performance
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="assignments.html" class="text-decoration-none text-dark">
+            <i class="fas fa-tasks me-2"></i>Assignments
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="attendance.html" class="text-decoration-none text-dark">
+            <i class="fas fa-calendar-check me-2"></i>Attendance
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="reports.html" class="text-decoration-none text-dark">
+            <i class="fas fa-file-alt me-2"></i>Reports
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+            <!-- Main Content -->
+ <main>
+  <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Student Attendance Form</h2>
+      <div>
+        <input type="date" id="classDate" class="form-control" placeholder="Select Date">
+      </div>
+    </div>
+    <form id="attendanceForm">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Student Name</th>
+            <th colspan="3" class="text-center">Attendance</th>
+            <th>Status</th>
+            <th>Total Attendance</th> <!-- NEW column -->
+          </tr>
+        </thead>
+        <tbody id="studentList">
+          <!-- Students will be dynamically added here -->
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <button type="submit" class="btn btn-success">Submit Attendance</button>
+        <button type="button" id="exportCSV" class="btn btn-primary">Export as CSV</button>
+      </div>
+    </form>
+    <div id="summaryBox" class="alert alert-info mt-4 d-none"></div>
+  </div>
+</main>
+
+<script>
+  const totalLectures = { count: 0 };
+
+  const studentAttendance = Array.from({ length: 10 }, (_, i) => ({
+    name: `Student ${i + 1}`,
+    presentCount: 0
+  }));
+
+  const classDateInput = document.getElementById('classDate');
+  const summaryBox = document.getElementById('summaryBox');
+  let latestAttendanceData = [];
+
+  window.onload = function () {
+    const studentList = document.getElementById('studentList');
+    for (let i = 1; i <= 10; i++) {
+      studentList.innerHTML += `
+      <tr>
+        <td>${i}</td>
+        <td>Student ${i}</td>
+        <td>
+          <input type="radio" name="attendance_${i}" id="present_${i}" value="Present" required>
+          <label for="present_${i}" class="radio-label label-present">Present</label>
+        </td>
+        <td>
+          <input type="radio" name="attendance_${i}" id="absent_${i}" value="Absent">
+          <label for="absent_${i}" class="radio-label label-absent">Absent</label>
+        </td>
+        <td>
+          <input type="radio" name="attendance_${i}" id="leave_${i}" value="Leave">
+          <label for="leave_${i}" class="radio-label label-leave">Leave</label>
+        </td>
+        <td class="status-text">Not marked</td>
+        <td class="total-attendance">0 / 0 (0.0%)</td>
+      </tr>
+    `;
+
+    }
+  }
+
+  document.getElementById('attendanceForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    totalLectures.count++;
+
+    let presentCount = 0, absentCount = 0, leaveCount = 0;
+    const rows = document.querySelectorAll('#studentList tr');
+    latestAttendanceData = [];
+
+    rows.forEach((row, index) => {
+      const name = row.cells[1].innerText.trim();
+      const statusText = row.querySelector('.status-text');
+      const radios = row.querySelectorAll(`input[name="attendance_${index + 1}"]`);
+      let status = 'Not marked';
+
+      radios.forEach(radio => {
+        if (radio.checked) status = radio.value;
+      });
+
+      statusText.textContent = status;
+      statusText.className = 'status-text';
+
+      if (status === 'Present') {
+        presentCount++;
+        statusText.classList.add('status-present');
+        studentAttendance[index].presentCount++;
+      } else if (status === 'Absent') {
+        absentCount++;
+        statusText.classList.add('status-absent');
+      } else if (status === 'Leave') {
+        leaveCount++;
+        statusText.classList.add('status-leave');
+      }
+
+      const total = totalLectures.count;
+      const studentPercentage = total > 0 ? ((studentAttendance[index].presentCount / total) * 100).toFixed(1) : '0.0';
+
+      // Update total attendance cell with total present / total lectures and percentage
+      const attendanceCell = row.querySelector('.total-attendance');
+      attendanceCell.textContent = `${studentAttendance[index].presentCount} / ${total} (${studentPercentage}%)`;
+
+      latestAttendanceData.push({
+        SNo: index + 1,
+        Name: name,
+        Status: status,
+        Total_Present: studentAttendance[index].presentCount,
+        Total_Lectures: total,
+        Percentage: studentPercentage + '%'
+      });
+    });
+
+    const totalMarked = presentCount + absentCount + leaveCount;
+    const classPercentage = totalMarked > 0 ? ((presentCount / totalMarked) * 100).toFixed(2) : 0;
+
+    summaryBox.innerHTML = `
+      <strong>Lecture #${totalLectures.count}</strong><br>
+      ✅ <strong>Present:</strong> ${presentCount} |
+      ❌ <strong>Absent:</strong> ${absentCount} |
+      🟡 <strong>Leave:</strong> ${leaveCount} <br>
+      📊 <strong>Class Attendance %:</strong> ${classPercentage}%
+    `;
+    summaryBox.classList.remove('d-none');
+
+    alert('Attendance saved successfully!');
+  });
+
+  document.getElementById('exportCSV').addEventListener('click', function () {
+    if (latestAttendanceData.length === 0) {
+      alert("Please submit attendance first.");
+      return;
+    }
+
+    let csv = 'S.No,Student Name,Status,Total Present,Total Lectures,Attendance %\n';
+    latestAttendanceData.forEach(row => {
+      csv += `${row.SNo},${row.Name},${row.Status},${row.Total_Present},${row.Total_Lectures},${row.Percentage}\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', `Attendance_${classDateInput.value || 'NoDate'}.csv`);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+</script>
+
+
+        
+    </div>
+  </div>
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+
+  </script>
+
+</body>
+</html> 

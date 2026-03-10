@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="materials.html" class="text-decoration-none text-dark">
+            <i class="fas fa-upload me-2"></i>Materials
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="grades.html" class="text-decoration-none text-dark">
+            <i class="fas fa-marker me-2"></i>Grades
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="performance.html" class="text-decoration-none text-dark">
+            <i class="fas fa-chart-line me-2"></i>Performance
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="assignments.html" class="text-decoration-none text-dark">
+            <i class="fas fa-tasks me-2"></i>Assignments
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="attendance.html" class="text-decoration-none text-dark">
+            <i class="fas fa-calendar-check me-2"></i>Attendance
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="reports.html" class="text-decoration-none text-dark">
+            <i class="fas fa-file-alt me-2"></i>Reports
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid py-4 px-3">
+      <h3 class="mb-4 fw-bold">Welcome, Professor!</h3>
+
+      <div class="d-flex flex-wrap align-items-center mb-4 gap-3">
+      <div class="ms-auto d-flex gap-3">
+        <!-- Semester Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="semesterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Select Semester
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="semesterDropdown" id="semesterMenu">
+            <li><a class="dropdown-item semester-option" href="#" data-semester="Spring 2025">Spring 2025</a></li>
+            <li><a class="dropdown-item semester-option" href="#" data-semester="Fall 2025">Fall 2025</a></li>
+          </ul>
+        </div>
+
+        <!-- Subject Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-outline-success dropdown-toggle" type="button" id="subjectDropdown" data-bs-toggle="dropdown" aria-expanded="false" disabled>
+            Select Subject
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="subjectDropdown" id="subjectMenu">
+            <!-- Filled dynamically based on semester -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- Teacher Dashboard Cards -->
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="card shadow-sm border-0">
+            <div class="card-body d-flex align-items-center">
+              <i class="fas fa-user-graduate fa-2x text-primary me-3"></i>
+              <div>
+                <h6 class="mb-1">Total Students</h6>
+                <h5 class="fw-bold mb-0">120</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card shadow-sm border-0">
+            <div class="card-body d-flex align-items-center">
+              <i class="fas fa-book-open fa-2x text-success me-3"></i>
+              <div>
+                <h6 class="mb-1">Materials Uploaded</h6>
+                <h5 class="fw-bold mb-0">45</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card shadow-sm border-0">
+            <div class="card-body d-flex align-items-center">
+              <i class="fas fa-clipboard-list fa-2x text-warning me-3"></i>
+              <div>
+                <h6 class="mb-1">Pending Assignments</h6>
+                <h5 class="fw-bold mb-0">8</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card shadow-sm border-0">
+            <div class="card-body d-flex align-items-center">
+              <i class="fas fa-chart-bar fa-2x text-danger me-3"></i>
+              <div>
+                <h6 class="mb-1">Average Grade</h6>
+                <h5 class="fw-bold mb-0">B+</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Chart -->
+      <div class="row mt-5">
+        <div class="col-lg-8">
+          <div class="card shadow-sm border-0">
+            <div class="card-header bg-white fw-bold">
+              Student Performance Overview
+            </div>
+            <div class="card-body">
+              <canvas id="performanceChart" height="220"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teacher Quick Actions -->
+        <div class="col-lg-4">
+          <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-white fw-bold">
+              Quick Actions
+            </div>
+            <div class="card-body d-grid gap-2">
+              <a href="materials.html" class="btn btn-outline-primary w-100">
+                <i class="fas fa-upload me-2"></i>Upload Materials
+              </a>
+              <a href="assignments.html" class="btn btn-outline-success w-100">
+                <i class="fas fa-tasks me-2"></i>Manage Assignments
+              </a>
+              <a href="grades.html" class="btn btn-outline-warning w-100">
+                <i class="fas fa-marker me-2"></i>Grade Submissions
+              </a>
+              <a href="attendance.html" class="btn btn-outline-info w-100">
+                <i class="fas fa-calendar-check me-2"></i>Mark Attendance
+              </a>
+              <a href="performance.html" class="btn btn-outline-danger w-100">
+                <i class="fas fa-chart-line me-2"></i>View Reports
+              </a>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+
+     const ctx = document.getElementById('performanceChart').getContext('2d');
+
+  const performanceChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+      datasets: [{
+        label: 'Average Grade',
+        data: [75, 80, 78, 85, 90],
+        borderColor: 'rgb(22, 118, 208)',
+        backgroundColor: 'rgba(6, 111, 231, 0.2)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            callback: function(value) {
+              return value + '%';
+            }
+          },
+          grid: {
+            color: '#f0f0f0',
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            font: {
+              size: 14
+            }
+          }
+        },
+        tooltip: {
+          enabled: true,
+          mode: 'index',
+          intersect: false,
+        }
+      },
+      interaction: {
+        mode: 'nearest',
+        axis: 'x',
+        intersect: false
+      }
+    }
+  });
+
+
+  const subjectDropdownBtn = document.getElementById('subjectDropdown');
+  const subjectMenu = document.getElementById('subjectMenu');
+
+  const semesterSubjects = {
+    "Spring 2025": ["AI", "Data Science", "Web Development"],
+    "Fall 2025": ["Machine Learning", "NLP", "Computer Vision"]
+  };
+
+  document.querySelectorAll('.semester-option').forEach(item => {
+    item.addEventListener('click', function () {
+      const semester = this.getAttribute('data-semester');
+      subjectDropdownBtn.innerText = 'Select Subject';
+      subjectDropdownBtn.disabled = false;
+
+      // Populate subjects
+      subjectMenu.innerHTML = '';
+      semesterSubjects[semester].forEach(subject => {
+        const subjectItem = document.createElement('li');
+        subjectItem.innerHTML = `<a class="dropdown-item subject-option" href="#" data-subject="${subject}">${subject}</a>`;
+        subjectMenu.appendChild(subjectItem);
+      });
+
+      // Listen for subject selection
+      setTimeout(() => {
+        document.querySelectorAll('.subject-option').forEach(subItem => {
+          subItem.addEventListener('click', function () {
+            const subject = this.getAttribute('data-subject');
+            subjectDropdownBtn.innerText = subject;
+
+            // Simulate navigation to dashboard
+            const dashboardURL = `dashboard_${semester.replace(/\s+/g, '_').toLowerCase()}_${subject.replace(/\s+/g, '_').toLowerCase()}.html`;
+            window.location.href = dashboardURL;
+          });
+        });
+      }, 50);
+    });
+  });
+
+
+  </script>
+
+</body>
+</html> 

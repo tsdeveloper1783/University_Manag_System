@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper"
+      style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="register-users.html" class="text-decoration-none text-dark"><i
+              class="fas fa-user-plus me-2"></i>Register Users</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="dept-coordinators.html" class="text-decoration-none text-dark">
+            <i class="fas fa-users-cog me-2"></i>Dept Coordinators
+          </a>
+        </li>
+
+        <li class="list-group-item bg-transparent border-0">
+          <a href="approve-teachers.html" class="text-decoration-none text-dark"><i
+              class="fas fa-user-check me-2"></i>Approve Teachers</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-semester.html" class="text-decoration-none text-dark"><i
+              class="fas fa-file-alt me-2"></i>Manage Semester</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-courses.html" class="text-decoration-none text-dark"><i
+              class="fas fa-book-open me-2"></i>Manage Courses</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="student-enrollments.html" class="text-decoration-none text-dark"><i
+              class="fas fa-user-graduate me-2"></i>Student Enrollment</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="fee-management.html" class="text-decoration-none text-dark"><i
+              class="fas fa-money-check-alt me-2"></i>Fee Management</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="activity-monitor.html" class="text-decoration-none text-dark"><i
+              class="fas fa-chart-line me-2"></i>Activity Monitor</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="generate-reports.html" class="text-decoration-none text-dark"><i
+              class="fas fa-file-download me-2"></i>Generate Reports</a>
+        </li>
+      </ul>
+      <li class="list-group-item bg-transparent border-0">
+        <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+          <i class="fas fa-cog me-2"></i>Settings
+        </a>
+      </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User"
+                id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button"
+                style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown"
+                style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <!-- Admin Dashboard Main Content -->
+
+      <div class="dashboard-main-content"
+        style="padding:20px; max-width:1200px; margin:auto; font-family:Arial, sans-serif;">
+
+        <div style="display:flex; gap:20px; margin-bottom:40px; flex-wrap: wrap;">
+
+          <!-- Students Card -->
+          <div class="card">
+            <div class="icon">&#128100;</div>
+            <h2 style="margin:0; font-weight:700; font-size:28px;">120</h2>
+            <p style="margin:5px 0 0; font-weight:600; color:#555;">Students</p>
+          </div>
+
+
+          <!-- Teachers Card -->
+          <div class="card">
+            <div style="font-size:40px; color:#2196F3; margin-bottom:10px;" class="icon">&#127979;</div>
+            <h2 style="margin:0; font-weight:700; font-size:28px;">25</h2>
+            <p style="margin:5px 0 0; font-weight:600; color:#555;">Teachers</p>
+          </div>
+
+          <!-- Courses Card -->
+          <div class="card">
+            <div class="icon">&#128218;</div>
+            <h2 style="margin:0; font-weight:700; font-size:28px;">40</h2>
+            <p style="margin:5px 0 0; font-weight:600; color:#555;">Courses</p>
+          </div>
+
+          <!-- Pending Approvals Card -->
+          <div class="card">
+            <div class="icon">&#9203;</div>
+            <h2 style="margin:0; font-weight:700; font-size:28px;">8</h2>
+            <p style="margin:5px 0 0; font-weight:600; color:#555;">Pending Approvals</p>
+          </div>
+
+
+        </div>
+
+
+        <!-- Performance Charts -->
+        <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:30px;">
+
+          <div
+            style="flex:1; min-width:280px; background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:20px;">
+            <h3 style="margin-bottom:15px; font-weight:600; color:#444;">Student Performance</h3>
+            <canvas id="studentPerformanceChart" style="width:100%; height:150px;"></canvas>
+          </div>
+
+          <div
+            style="flex:1; min-width:280px; background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:20px;">
+            <h3 style="margin-bottom:15px; font-weight:600; color:#444;">Course Enrollments</h3>
+            <canvas id="courseEnrollmentsChart" style="width:100%; height:150px;"></canvas>
+          </div>
+
+        </div>
+
+        <!-- Recent Notifications - Refined -->
+        <div
+          style="background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:20px; margin-bottom:30px; max-height:220px; overflow-y:auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+          <h3
+            style="margin-bottom:15px; font-weight:600; color:#444; border-bottom:1px solid #eee; padding-bottom:8px;">
+            Recent Notifications</h3>
+          <ul style="list-style:none; padding-left:0; margin:0; font-size:14px; color:#555; line-height:1.6;">
+            <li style="display:flex; align-items:center; margin-bottom:12px;">
+              <span style="color:#4CAF50; font-size:18px; margin-right:10px;">&#128221;</span>
+              <div>
+                <strong>Mr. Ahmed</strong> uploaded results for <em>Math 101</em>.
+                <div style="font-size:12px; color:#999;">2 hours ago</div>
+              </div>
+            </li>
+            <li style="display:flex; align-items:center; margin-bottom:12px;">
+              <span style="color:#2196F3; font-size:18px; margin-right:10px;">&#128100;</span>
+              <div>
+                <strong>Ali Khan</strong> requested course enrollment.
+                <div style="font-size:12px; color:#999;">5 hours ago</div>
+              </div>
+            </li>
+            <li style="display:flex; align-items:center; margin-bottom:12px;">
+              <span style="color:#4CAF50; font-size:18px; margin-right:10px;">&#9989;</span>
+              <div>
+                New teacher <strong>Ms. Fatima</strong> registration approved.
+                <div style="font-size:12px; color:#999;">1 day ago</div>
+              </div>
+            </li>
+            <li style="display:flex; align-items:center; margin-bottom:12px;">
+              <span style="color:#FF9800; font-size:18px; margin-right:10px;">&#9888;</span>
+              <div>
+                System scheduled maintenance on <strong>15th June</strong>.
+                <div style="font-size:12px; color:#999;">3 days ago</div>
+              </div>
+            </li>
+            <li style="display:flex; align-items:center;">
+              <span style="color:#2196F3; font-size:18px; margin-right:10px;">&#128221;</span>
+              <div>
+                <strong>Sara</strong> submitted assignment for <em>Physics</em>.
+                <div style="font-size:12px; color:#999;">Just now</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+
+        <!-- Approvals Section -->
+        <div style="background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:20px;">
+          <h3 style="margin-bottom:15px; font-weight:600; color:#444;">Pending Approvals</h3>
+
+          <div style="display:flex; flex-direction:column; gap:15px; max-width:600px;">
+            <!-- Approval Card 1 -->
+            <div
+              style="border:1px solid #ddd; border-radius:6px; padding:15px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div><strong>Ali Raza</strong> (Student)</div>
+                <div style="font-size:13px; color:#777;">Requested on 8th June 2025</div>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <button
+                  style="padding:6px 12px; background:#4CAF50; border:none; border-radius:4px; color:#fff; cursor:pointer;">Approve</button>
+                <button
+                  style="padding:6px 12px; background:#f44336; border:none; border-radius:4px; color:#fff; cursor:pointer;">Reject</button>
+              </div>
+            </div>
+
+            <!-- Approval Card 2 -->
+            <div
+              style="border:1px solid #ddd; border-radius:6px; padding:15px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div><strong>Sara Ahmed</strong> (Teacher)</div>
+                <div style="font-size:13px; color:#777;">Requested on 7th June 2025</div>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <button
+                  style="padding:6px 12px; background:#4CAF50; border:none; border-radius:4px; color:#fff; cursor:pointer;">Approve</button>
+                <button
+                  style="padding:6px 12px; background:#f44336; border:none; border-radius:4px; color:#fff; cursor:pointer;">Reject</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <script>
+        // Student Performance Chart
+        const ctxStudent = document.getElementById('studentPerformanceChart').getContext('2d');
+        const studentPerformanceChart = new Chart(ctxStudent, {
+          type: 'line',
+          data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+              label: 'Average Score',
+              data: [75, 80, 78, 85, 90, 88],
+              fill: false,
+              borderColor: '#4CAF50',
+              tension: 0.3
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: true } },
+            scales: {
+              y: { beginAtZero: true, max: 100 }
+            }
+          }
+        });
+
+        // Course Enrollments Chart
+        const ctxCourse = document.getElementById('courseEnrollmentsChart').getContext('2d');
+        const courseEnrollmentsChart = new Chart(ctxCourse, {
+          type: 'bar',
+          data: {
+            labels: ['Math 101', 'Physics', 'Chemistry', 'Biology', 'History', 'English'],
+            datasets: [{
+              label: 'Enrollments',
+              data: [30, 25, 18, 20, 15, 22],
+              backgroundColor: '#2196F3'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true }
+            }
+          }
+        });
+      </script>
+
+      <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+      <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header custom-header">
+              <h5 class="modal-title">Account Settings</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <!-- First Name -->
+              <div class="mb-3">
+                <h6>First Name</h6>
+                <input type="text" class="form-control" placeholder="Enter first name" />
+              </div>
+
+              <!-- Last Name -->
+              <div class="mb-3">
+                <h6>Last Name</h6>
+                <input type="text" class="form-control" placeholder="Enter last name" />
+              </div>
+
+              <!-- Phone Number -->
+              <div class="mb-3">
+                <h6>Phone Number</h6>
+                <input type="tel" class="form-control" placeholder="Enter phone number" />
+              </div>
+
+              <!-- Change Password -->
+              <div class="mb-4">
+                <h6>Change Password</h6>
+                <input type="password" class="form-control mb-2" placeholder="Current Password" />
+                <input type="password" class="form-control mb-2" placeholder="New Password" />
+                <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+                <button class="btn btn-primary btn-sm">Change Password</button>
+              </div>
+
+              <!-- Change Profile Picture -->
+              <div class="mb-4">
+                <h6>Change Profile Picture</h6>
+                <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+                <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+                <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <footer class="text-center py-3 bg-light  border-top">
+        <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+      </footer>
+
+      <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+      <!-- Bootstrap JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+      <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+      <script>
+        const toggleBtn = document.getElementById("menu-toggle");
+        const sidebar = document.getElementById("sidebar-wrapper");
+        const closeBtn = document.getElementById("sidebar-close");
+
+        toggleBtn.addEventListener("click", () => {
+          sidebar.classList.remove("d-none");
+          toggleBtn.classList.add("d-none");
+          closeBtn.classList.remove("d-none");
+        });
+
+        closeBtn.addEventListener("click", () => {
+          sidebar.classList.add("d-none");
+          toggleBtn.classList.remove("d-none");
+          closeBtn.classList.add("d-none");
+        });
+
+        const imageInput = document.getElementById('profileImageInput');
+        const profilePreview = document.getElementById('profilePreview');
+
+        imageInput.addEventListener('change', function () {
+          const file = this.files[0];
+          if (file) {
+            profilePreview.src = URL.createObjectURL(file);
+            profilePreview.classList.remove('d-none');
+          }
+        });
+
+        function uploadProfilePicture() {
+          // Implement actual upload logic here (e.g., via AJAX or form submit)
+          alert("Profile picture uploaded successfully!");
+        }
+
+
+      </script>
+
+</body>
+
+</html>

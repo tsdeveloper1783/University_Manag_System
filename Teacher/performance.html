@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="materials.html" class="text-decoration-none text-dark">
+            <i class="fas fa-upload me-2"></i>Materials
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="grades.html" class="text-decoration-none text-dark">
+            <i class="fas fa-marker me-2"></i>Grades
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="performance.html" class="text-decoration-none text-dark">
+            <i class="fas fa-chart-line me-2"></i>Performance
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="assignments.html" class="text-decoration-none text-dark">
+            <i class="fas fa-tasks me-2"></i>Assignments
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="attendance.html" class="text-decoration-none text-dark">
+            <i class="fas fa-calendar-check me-2"></i>Attendance
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="reports.html" class="text-decoration-none text-dark">
+            <i class="fas fa-file-alt me-2"></i>Reports
+          </a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+            <!-- Main Content -->
+        <!-- Main Content -->
+<div class="container-fluid px-4 py-4">
+
+  <h2 class="mb-4 text-primary fw-bold">Teacher Performance Dashboard</h2>
+
+  <div class="row g-4">
+
+    <!-- KPI Cards -->
+    <div class="col-md-3">
+      <div class="card shadow-sm border-start border-4 border-primary">
+        <div class="card-body">
+          <h6 class="text-uppercase text-muted">Average Student Grade</h6>
+          <h3 class="fw-bold">85.6%</h3>
+          <p class="text-success"><i class="fas fa-arrow-up"></i> 4.2% since last month</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm border-start border-4 border-success">
+        <div class="card-body">
+          <h6 class="text-uppercase text-muted">Assignments Graded</h6>
+          <h3 class="fw-bold">123</h3>
+          <p class="text-danger"><i class="fas fa-arrow-down"></i> 2.1% since last month</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm border-start border-4 border-warning">
+        <div class="card-body">
+          <h6 class="text-uppercase text-muted">Student Attendance</h6>
+          <h3 class="fw-bold">92.3%</h3>
+          <p class="text-success"><i class="fas fa-arrow-up"></i> 1.5% since last month</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm border-start border-4 border-info">
+        <div class="card-body">
+          <h6 class="text-uppercase text-muted">Average Feedback Score</h6>
+          <h3 class="fw-bold">4.6 / 5</h3>
+          <p class="text-success"><i class="fas fa-arrow-up"></i> 0.3 increase</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Charts Section -->
+  <div class="row mt-5 g-4">
+
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white fw-bold">
+          Student Grades Over Last 6 Months
+        </div>
+        <div class="card-body">
+          <canvas id="gradesChart" height="250"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white fw-bold">
+          Assignments Graded Per Month
+        </div>
+        <div class="card-body">
+          <canvas id="assignmentsChart" height="250"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mt-4 g-4">
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-warning text-dark fw-bold">
+          Attendance Rate by Course
+        </div>
+        <div class="card-body">
+          <canvas id="attendanceChart" height="250"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-info text-white fw-bold">
+          Feedback Distribution
+        </div>
+        <div class="card-body">
+          <canvas id="feedbackChart" height="250"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Chart Data and Config
+
+  // Grades Line Chart
+  const ctxGrades = document.getElementById('gradesChart').getContext('2d');
+  const gradesChart = new Chart(ctxGrades, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Average Grade (%)',
+        data: [78, 82, 85, 88, 90, 85],
+        backgroundColor: 'rgba(13, 110, 253, 0.2)',
+        borderColor: 'rgba(13, 110, 253, 1)',
+        borderWidth: 3,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 5,
+        pointBackgroundColor: 'rgba(13, 110, 253, 1)',
+        pointHoverRadius: 7,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: { stepSize: 10 }
+        }
+      },
+      plugins: {
+        legend: { display: true, position: 'top' }
+      }
+    }
+  });
+
+  // Assignments Bar Chart
+  const ctxAssignments = document.getElementById('assignmentsChart').getContext('2d');
+  const assignmentsChart = new Chart(ctxAssignments, {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Assignments Graded',
+        data: [18, 21, 25, 22, 20, 17],
+        backgroundColor: 'rgba(25, 135, 84, 0.8)'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 5 }
+        }
+      },
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+
+  // Attendance Pie Chart
+  const ctxAttendance = document.getElementById('attendanceChart').getContext('2d');
+  const attendanceChart = new Chart(ctxAttendance, {
+    type: 'doughnut',
+    data: {
+      labels: ['Math 101', 'Physics 102', 'Chemistry 103', 'English 104'],
+      datasets: [{
+        label: 'Attendance Rate (%)',
+        data: [95, 89, 92, 90],
+        backgroundColor: [
+          'rgba(255, 193, 7, 0.8)',
+          'rgba(255, 159, 64, 0.8)',
+          'rgba(255, 205, 86, 0.8)',
+          'rgba(255, 238, 88, 0.8)'
+        ],
+        hoverOffset: 20
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' }
+      }
+    }
+  });
+
+  // Feedback Polar Area Chart
+  const ctxFeedback = document.getElementById('feedbackChart').getContext('2d');
+  const feedbackChart = new Chart(ctxFeedback, {
+    type: 'polarArea',
+    data: {
+      labels: ['Excellent', 'Good', 'Average', 'Poor', 'Very Poor'],
+      datasets: [{
+        label: 'Feedback Count',
+        data: [50, 30, 10, 5, 2],
+        backgroundColor: [
+          'rgba(13, 202, 240, 0.8)',
+          'rgba(32, 201, 151, 0.8)',
+          'rgba(255, 193, 7, 0.8)',
+          'rgba(220, 53, 69, 0.8)',
+          'rgba(108, 117, 125, 0.8)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'right' }
+      }
+    }
+  });
+</script>
+
+
+    </div>
+  </div>
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+
+  </script>
+
+</body>
+</html> 

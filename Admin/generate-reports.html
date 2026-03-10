@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="register-users.html" class="text-decoration-none text-dark"><i class="fas fa-user-plus me-2"></i>Register Users</a>
+        </li>
+            <li class="list-group-item bg-transparent border-0">
+  <a href="dept-coordinators.html" class="text-decoration-none text-dark">
+    <i class="fas fa-users-cog me-2"></i>Dept Coordinators
+  </a>
+</li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="approve-teachers.html" class="text-decoration-none text-dark"><i class="fas fa-user-check me-2"></i>Approve Teachers</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-semester.html" class="text-decoration-none text-dark"><i class="fas fa-file-alt me-2"></i>Manage Semester</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-courses.html" class="text-decoration-none text-dark"><i class="fas fa-book-open me-2"></i>Manage Courses</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="student-enrollments.html" class="text-decoration-none text-dark"><i class="fas fa-user-graduate me-2"></i>Student Enrollment</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="fee-management.html" class="text-decoration-none text-dark"><i class="fas fa-money-check-alt me-2"></i>Fee Management</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="activity-monitor.html" class="text-decoration-none text-dark"><i class="fas fa-chart-line me-2"></i>Activity Monitor</a>
+        </li>
+         <li class="list-group-item bg-transparent border-0">
+          <a href="generate-reports.html" class="text-decoration-none text-dark"><i class="fas fa-file-download me-2"></i>Generate Reports</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+            <!-- Main Content -->
+        <div class="container py-5">
+  <h1 class="mb-4 text-center fw-bold">Generate Reports</h1>
+
+  <!-- Report Selection Card -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <form id="reportForm" class="row g-3 align-items-end">
+        <div class="col-md-4">
+          <label for="reportType" class="form-label fw-semibold">Report Type</label>
+          <select id="reportType" class="form-select" required>
+            <option value="" disabled selected>Select Report Type</option>
+            <option value="student">Student Report</option>
+            <option value="teacher">Teacher Report</option>
+            <option value="course">Course Report</option>
+            <option value="fee">Fee Report</option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label for="fromDate" class="form-label fw-semibold">From Date</label>
+          <input type="date" id="fromDate" class="form-control" />
+        </div>
+
+        <div class="col-md-3">
+          <label for="toDate" class="form-label fw-semibold">To Date</label>
+          <input type="date" id="toDate" class="form-control" />
+        </div>
+
+        <div class="col-md-2 d-grid">
+          <button type="submit" class="btn btn-primary fw-bold">Generate</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Search & Export Actions -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <input
+      type="search"
+      id="searchInput"
+      class="form-control w-50"
+      placeholder="Search by name or status..."
+      aria-label="Search reports"
+    />
+    <div>
+      <button type="button" class="btn btn-success me-2 fw-semibold">
+        <i class="fas fa-file-excel me-1"></i> Export Excel
+      </button>
+      <button type="button" class="btn btn-danger fw-semibold">
+        <i class="fas fa-file-pdf me-1"></i> Export PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Reports Table -->
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-hover align-middle">
+      <thead class="table-primary text-center">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="reportBody" class="text-center">
+        <tr>
+          <td colspan="5" class="py-5 text-muted fst-italic">Select a report type and click Generate to view data.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Report navigation" class="mt-4 d-flex justify-content-center">
+    <ul class="pagination pagination-sm">
+      <li class="page-item"><a class="page-link" href="#">«</a></li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">»</a></li>
+    </ul>
+  </nav>
+</div>
+
+<script>
+  const sampleReports = {
+    student: [
+      ["1", "Ahsan Ali", "Student", "Active", "2025-05-28"],
+      ["2", "Fatima Khan", "Student", "Inactive", "2025-05-20"],
+      ["3", "Umer Farooq", "Student", "Active", "2025-04-12"]
+    ],
+    teacher: [
+      ["1", "Dr. Asim", "Teacher", "Active", "2025-04-10"],
+      ["2", "Ms. Sara", "Teacher", "On Leave", "2025-05-01"]
+    ],
+    course: [
+      ["1", "OOP", "Course", "Ongoing", "2025-02-15"],
+      ["2", "DBMS", "Course", "Completed", "2025-01-10"]
+    ],
+    fee: [
+      ["1", "Hamza Iqbal", "Fee", "Paid", "2025-05-01"],
+      ["2", "Sana Tariq", "Fee", "Pending", "2025-05-20"]
+    ]
+  };
+
+  const reportForm = document.getElementById("reportForm");
+  const reportBody = document.getElementById("reportBody");
+  const searchInput = document.getElementById("searchInput");
+
+  function renderRows(rows) {
+    reportBody.innerHTML = "";
+    if (rows.length === 0) {
+      reportBody.innerHTML = `<tr><td colspan="5" class="py-4 text-muted fst-italic">No records found.</td></tr>`;
+      return;
+    }
+    rows.forEach(row => {
+      const tr = document.createElement("tr");
+      row.forEach(cell => {
+        const td = document.createElement("td");
+        td.textContent = cell;
+        tr.appendChild(td);
+      });
+      reportBody.appendChild(tr);
+    });
+  }
+
+  let currentData = [];
+
+  reportForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const type = document.getElementById("reportType").value;
+    const from = document.getElementById("fromDate").value;
+    const to = document.getElementById("toDate").value;
+
+    if (!type) {
+      alert("Please select a report type.");
+      return;
+    }
+
+    let rows = sampleReports[type] || [];
+
+    if (from || to) {
+      rows = rows.filter(row => {
+        const date = row[4];
+        return (!from || date >= from) && (!to || date <= to);
+      });
+    }
+
+    currentData = rows;
+    renderRows(rows);
+  });
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    const filtered = currentData.filter(row =>
+      row.some(cell => cell.toLowerCase().includes(query))
+    );
+    renderRows(filtered);
+  });
+</script>
+
+    </div>
+  </div>
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+
+
+  </script>
+
+</body>
+</html> 

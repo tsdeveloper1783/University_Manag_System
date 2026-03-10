@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .policy-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.policy-section li {
+  margin-bottom: 8px;
+}
+
+.main-content h1, .main-content h2 {
+  color: #333;
+}
+</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Head of Department Dashboard</title>
+
+  <!-- ===========================
+       EXTERNAL CSS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Asset/css/dashboard.css" />
+
+  <!-- Chart.js CDN -->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===========================
+       MAIN DASHBOARD WRAPPER
+       =========================== -->
+  <div class="d-flex" id="dashboard-wrapper">
+
+    <!-- ===========================
+         SIDEBAR NAVIGATION
+         =========================== -->
+    <nav class="bg-light border-end p-3 position-relative d-none" id="sidebar-wrapper" style="width: 260px; min-height: 100vh;  ">
+      <button class="btn btn-sm btn-light d-none" id="sidebar-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-heading text-center mb-4 mt-4">
+        <img src="Asset/img/logo.jpeg" alt="Logo" class="rounded-circle" width="60" height="60">
+        <h5 class="mt-2">UMW LMS</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0">
+          <a href="index.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Dashboard</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="approve-course-content.html" class="text-decoration-none text-dark"><i class="fas fa-check-circle"></i> Approve Content</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="view-performance.html" class="text-decoration-none text-dark"><i class="fas fa-chart-bar me-2"></i>View Performance</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="assign-teachers.html" class="text-decoration-none text-dark"><i class="fas fa-chalkboard-teacher me-2"></i>Assign Teachers</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="class-progress.html" class="text-decoration-none text-dark"><i class="fas fa-tasks me-2"></i>Class Progress</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="manage-events.html" class="text-decoration-none text-dark"><i class="fas fa-calendar-alt me-2"></i>Manage Events</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="approve-enrollments.html" class="text-decoration-none text-dark"><i class="fas fa-user-check me-2"></i>Approve Students</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="collect-feedback.html" class="text-decoration-none text-dark"><i class="fas fa-comments me-2"></i>Collect Feedback</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a href="generate-reports.html" class="text-decoration-none text-dark"><i class="fas fa-file-export me-2"></i>Generate Reports</a>
+        </li>
+        <li class="list-group-item bg-transparent border-0">
+          <a data-bs-toggle="modal" data-bs-target="#settingsModal" class="text-decoration-none text-dark">
+            <i class="fas fa-cog me-2"></i>Settings
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-4 border-top">
+        <a href="account.html" class="text-decoration-none text-dark">
+          <div class="d-flex align-items-center">
+            <img src="Asset/img/user.png" class="rounded-circle me-2" width="40" height="40" alt="User Image">
+            <div>
+              <strong>User Name</strong><br />
+              <small class="text-muted">User Designation</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===========================
+         PAGE CONTENT AREA
+         =========================== -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+
+      <!-- ===========================
+           TOP NAVIGATION BAR
+           =========================== -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-3">
+        <div class="container-fluid">
+          <button class="btn btn-outline-secondary" id="menu-toggle">
+            <i class="fas fa-bars" id="toggle-icon"></i>
+          </button>
+
+          <div class="d-flex align-items-center" id="logo-container">
+            <img src="Asset/img/logo.jpeg" id="logo" width="50" height="50" />
+            <span class="ms-2 fw-bold">University of Mianwali</span>
+          </div>
+
+          <div class="dropdown ms-auto">
+            <div class="d-flex align-items-center">
+              <div class="text-end me-2">
+                <strong>User Name</strong><br />
+                <small class="text-muted">User Designation</small>
+              </div>
+              <img src="Asset/img/user.png" class="rounded-circle dropdown-toggle" width="40" height="40" alt="User" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="cursor: pointer;">
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; border-radius: 12px;">
+                <li>
+                  <a class="dropdown-item" href="profile.html">
+                    <i class="fas fa-user me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Settings
+                  </button>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+            <main class="main-content p-4" id="mainContent">
+
+  <h1 class="mb-4 text-primary fw-bold"><i class="bi bi-check2-square me-2"></i>Approve Course Content - Semester Wise</h1>
+
+  <div class="policy-section mb-5 p-4 bg-light border rounded shadow-sm">
+    <h2 class="mb-4 text-dark"><i class="bi bi-shield-lock-fill me-2 text-secondary"></i>HOD Assignment Rules (Quick View)</h2>
+    
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-person-badge-fill text-primary fs-4 me-3"></i>
+          <div><strong>Expertise Match:</strong> Instructor must align with course field.</div>
+        </div>
+      </div>
+      
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-award-fill text-success fs-4 me-3"></i>
+          <div><strong>Experience:</strong> Senior courses = senior instructors.</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-clock-fill text-warning fs-4 me-3"></i>
+          <div><strong>Workload Limit:</strong> Max 9–12 credit hours/instructor.</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-lightning-fill text-danger fs-4 me-3"></i>
+          <div><strong>Course Difficulty:</strong> Complex topics = capable hands.</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-bar-chart-fill text-info fs-4 me-3"></i>
+          <div><strong>Performance:</strong> Based on past results & feedback.</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-repeat text-secondary fs-4 me-3"></i>
+          <div><strong>Backlogs:</strong> Prefer same teacher for repeats.</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-tools text-dark fs-4 me-3"></i>
+          <div><strong>Practical Courses:</strong> Assign to hands-on experts.</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-emoji-smile-fill text-success fs-4 me-3"></i>
+          <div><strong>Preferences:</strong> Consider instructor's interest if possible.</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-person-lines-fill text-muted fs-4 me-3"></i>
+          <div><strong>Extra Duties:</strong> Reduce load for admin-heavy staff.</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-arrow-repeat text-primary fs-4 me-3"></i>
+          <div><strong>Rotation:</strong> Alternate instructors every cycle.</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-x-circle-fill text-danger fs-4 me-3"></i>
+          <div><strong>Mid-Semester Exit:</strong> HOD can revoke course anytime.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 alert alert-info">
+      <i class="bi bi-info-circle me-2"></i>
+      <strong>Rule Example:</strong> “Instructor with 3+ years in Software Engineering and under 6 credit hours → assigned CSC-502.”
+    </div>
+  </div>
+
+  <div id="content"></div>
+
+</main>
+
+    </div>
+  </div>
+
+  <!-- ===========================
+       SETTINGS MODAL
+       =========================== -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header custom-header">
+          <h5 class="modal-title">Account Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <h6>First Name</h6>
+            <input type="text" class="form-control" placeholder="Enter first name" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <h6>Last Name</h6>
+            <input type="text" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <h6>Phone Number</h6>
+            <input type="tel" class="form-control" placeholder="Enter phone number" />
+          </div>
+
+          <!-- Change Password -->
+          <div class="mb-4">
+            <h6>Change Password</h6>
+            <input type="password" class="form-control mb-2" placeholder="Current Password" />
+            <input type="password" class="form-control mb-2" placeholder="New Password" />
+            <input type="password" class="form-control mb-2" placeholder="Confirm New Password" />
+            <button class="btn btn-primary btn-sm">Change Password</button>
+          </div>
+
+          <!-- Change Profile Picture -->
+          <div class="mb-4">
+            <h6>Change Profile Picture</h6>
+            <input class="form-control" type="file" accept="image/*" id="profileImageInput" />
+            <img id="profilePreview" src="#" alt="Profile Preview" class="img-thumbnail mt-2 d-none" width="120" />
+            <button class="btn btn-primary btn-sm mt-2" onclick="uploadProfilePicture()">Upload</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="text-center py-3 bg-light  border-top">
+  <small>&copy; 2025 University of Mianwali. All rights reserved.</small>
+  </footer>
+
+  <!-- ===========================
+       EXTERNAL JS LIBRARIES
+       =========================== -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===========================
+       CUSTOM JS FOR SIDEBAR AND PROFILE UPLOAD
+       =========================== -->
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar-wrapper");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      closeBtn.classList.remove("d-none");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      closeBtn.classList.add("d-none");
+    });
+
+    const imageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        profilePreview.src = URL.createObjectURL(file);
+        profilePreview.classList.remove('d-none');
+      }
+    });
+
+    function uploadProfilePicture() {
+      // Implement actual upload logic here (e.g., via AJAX or form submit)
+      alert("Profile picture uploaded successfully!");
+    }
+    const subjectsData = {
+  "Semester 1": [
+    { code: "CSC-101", name: "Programming Fundamentals", instructor: "Mr. X" },
+    { code: "CIT-201", name: "Introduction to ICT", instructor: "Mr. Y" },
+    { code: "PHY-201", name: "Applied Physics", instructor: "Ms. Z" },
+    { code: "MATH-101", name: "Calculus", instructor: "Mr. A" }
+  ],
+  "Semester 2": [
+    { code: "CSC-201", name: "Data Structures & Algorithms", instructor: "Mr. B" },
+    { code: "CIT-301", name: "Database Systems", instructor: "Ms. C" },
+    { code: "ENG-201", name: "Technical Writing", instructor: "Mr. D" },
+    { code: "MATH-201", name: "Linear Algebra", instructor: "Ms. E" }
+  ],
+  "Semester 3": [
+    { code: "CSC-301", name: "Operating Systems", instructor: "Mr. E" },
+    { code: "MATH-301", name: "Discrete Mathematics", instructor: "Ms. F" },
+    { code: "PHY-301", name: "Electromagnetism", instructor: "Mr. G" },
+    { code: "ENG-301", name: "Communication Skills", instructor: "Ms. H" }
+  ],
+  "Semester 4": [
+    { code: "CSC-401", name: "Software Engineering", instructor: "Ms. H" },
+    { code: "CSC-402", name: "Computer Networks", instructor: "Mr. I" },
+    { code: "CIT-401", name: "Web Technologies", instructor: "Ms. J" },
+    { code: "MATH-401", name: "Probability and Statistics", instructor: "Mr. K" }
+  ],
+  "Semester 5": [
+    { code: "CSC-501", name: "Artificial Intelligence", instructor: "Dr. L" },
+    { code: "CIT-501", name: "Mobile Application Development", instructor: "Mr. M" },
+    { code: "CSC-502", name: "Design & Analysis of Algorithms", instructor: "Ms. N" },
+    { code: "CSC-503", name: "Software Project Management", instructor: "Dr. O" }
+  ],
+  "Semester 6": [
+    { code: "CSC-601", name: "Machine Learning", instructor: "Dr. P" },
+    { code: "CIT-601", name: "Cloud Computing", instructor: "Ms. Q" },
+    { code: "CSC-602", name: "Compiler Construction", instructor: "Mr. R" },
+    { code: "CSC-603", name: "Information Security", instructor: "Ms. S" }
+  ],
+  "Semester 7": [
+    { code: "CSC-701", name: "Final Year Project - I", instructor: "Mr. T" },
+    { code: "CSC-702", name: "Human Computer Interaction", instructor: "Ms. U" },
+    { code: "CIT-701", name: "Data Mining", instructor: "Dr. V" },
+    { code: "CSC-703", name: "Professional Practices", instructor: "Mr. W" }
+  ],
+  "Semester 8": [
+    { code: "CSC-801", name: "Final Year Project - II", instructor: "Dr. X" },
+    { code: "CSC-802", name: "Big Data Analytics", instructor: "Ms. Y" },
+    { code: "CIT-801", name: "Blockchain Technology", instructor: "Mr. Z" },
+    { code: "CSC-803", name: "DevOps", instructor: "Dr. AA" }
+  ]
+};
+
+function renderSubjects() {
+  const contentDiv = document.getElementById("content");
+  contentDiv.innerHTML = "";
+
+  let index = 0;
+
+  for (const semester in subjectsData) {
+    const collapseId = `collapse${index}`;
+    const semesterId = `semester${index}`;
+
+    const subjects = subjectsData[semester].map((subject, subjectIndex) => `
+      <tr id="row-${index}-${subjectIndex}">
+        <td>${subject.code}</td>
+        <td>${subject.name}</td>
+        <td id="instructor-${index}-${subjectIndex}">${subject.instructor}</td>
+        <td>
+          <button class="btn btn-success btn-sm me-1" onclick="assignCourse(${index}, ${subjectIndex})">
+            Assign
+          </button>
+          <button class="btn btn-danger btn-sm" onclick="removeInstructor(${index}, ${subjectIndex})">
+            Remove
+          </button>
+        </td>
+      </tr>
+    `).join("");
+
+    const semesterHTML = `
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="${semesterId}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">
+            ${semester}
+          </button>
+        </h2>
+        <div id="${collapseId}" class="accordion-collapse collapse" aria-labelledby="${semesterId}" data-bs-parent="#content">
+          <div class="accordion-body">
+            <table class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Course Code</th>
+                  <th>Course Name</th>
+                  <th>Assigned Instructor</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${subjects}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `;
+
+    contentDiv.innerHTML += semesterHTML;
+    index++;
+  }
+}
+
+// Handle assignment (you can add logic to reassign via prompt)
+function assignCourse(semIndex, subIndex) {
+  const newInstructor = prompt("Enter instructor name to assign:");
+  if (newInstructor) {
+    const instructorCell = document.getElementById(`instructor-${semIndex}-${subIndex}`);
+    instructorCell.textContent = newInstructor;
+    alert(`✅ Course assigned to ${newInstructor}`);
+  }
+}
+
+// Handle removal
+function removeInstructor(semIndex, subIndex) {
+  const instructorCell = document.getElementById(`instructor-${semIndex}-${subIndex}`);
+  const currentInstructor = instructorCell.textContent;
+  if (currentInstructor !== "—") {
+    instructorCell.textContent = "—";
+    alert(`❌ Instructor ${currentInstructor} has been removed from the course.`);
+  } else {
+    alert("⚠️ No instructor to remove.");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", renderSubjects);
+
+  </script>
+
+</body>
+</html> 
